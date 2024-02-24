@@ -22,4 +22,6 @@ public interface UserService {
     public List<User> getAlumni();
 
     public List<User> searchAlumni(String keyword);
+
+    public List<User> getAlumniWithPagination(int pageNo);
 }

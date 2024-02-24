@@ -9,6 +9,7 @@ import PopularCategory from "@/custom_components/PopularCategory";
 import { CarouselList } from "@/custom_components/CarouselList";
 
 function Home() {
+
     return (
         <div>
             {/* // navbar // main content */}
