@@ -31,6 +31,14 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category addCategory(Category category) {
+
+        // check if category already exists
+        Category existingCategory = categoryRepository.findByTitle(category.getTitle()).orElse(null);
+
+        if (existingCategory != null) {
+            return existingCategory;
+        }
+
         return categoryRepository.save(category);
     }
 

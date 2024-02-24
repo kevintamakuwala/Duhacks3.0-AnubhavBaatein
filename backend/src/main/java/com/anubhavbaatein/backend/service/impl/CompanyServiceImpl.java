@@ -31,6 +31,14 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Company addCompany(Company company) {
+
+        // check if company already exists
+        Company existingCompany = companyRepository.findByName(company.getName()).orElse(null);
+
+        if (existingCompany != null) {
+            return existingCompany;
+        }
+
         return companyRepository.save(company);
     }
 
