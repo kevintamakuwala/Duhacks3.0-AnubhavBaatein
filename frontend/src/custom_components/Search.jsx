@@ -5,7 +5,7 @@ import React from "react";
 
 function Search() {
   return (
-    <div className="flex justify-start space-x-4">
+    <div className="flex justify-center sm:justify-start space-x-2 ml-3">
       <div className="flex items-center border rounded-md px-3 py-2 h-full">
         <input
           type="search"

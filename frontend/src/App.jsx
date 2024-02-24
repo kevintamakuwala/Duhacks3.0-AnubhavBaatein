@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-// import { Home } from "./Custom_Components/Home";
-// import Auth from "./Custom_Components/Auth";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -14,29 +13,32 @@ import Navbar from "./custom_components/Navbar";
 import Footer from "./custom_components/Footer";
 import Home from "./Pages/Home";
 import PostExperience from "./Pages/PostExperience";
+import Alumni from "./Pages/Alumni";
 // import { auth } from "./config/firebase";
+import { auth } from "./config/firebase";
+import Contact from "./Pages/Contact";
 
 export const AppContext = createContext();
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState();
-  // console.log(auth?.currentUser);
+  console.log(auth?.currentUser);
 
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged((user) => {
-  //     setUser(user);
-  //     if (user) {
-  //       setIsLoggedIn(true);
-  //     } else {
-  //       setIsLoggedIn(false);
-  //     }
-  //   });
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+      if (user) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
 
-  //   return () => {
-  //     unsubscribe();
-  //   };
-  // }, []);
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return (
     <AppContext.Provider value={{ isLoggedIn, setIsLoggedIn , user , setUser }}>
@@ -44,12 +46,14 @@ export default function App() {
           <Navbar />
       <div className="flex justify-center items-center h-full">
           <Routes>
-            <Route path="/" element={<Home/>}/>
+            <Route path="/" element={isLoggedIn ? <Home/> : <Login/>}/>
             <Route path="/settings" element={<Settings/>} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/experiences" element={<Experiences/>} />
             <Route path="/postexperience" element={<PostExperience />} />
+            <Route path="/alumni" element={<Alumni/>}/>
+            <Route path="/contact" element={<Contact />} />
           </Routes>
       </div>
         <Footer />
