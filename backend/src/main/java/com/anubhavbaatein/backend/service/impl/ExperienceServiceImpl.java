@@ -124,14 +124,13 @@ public class ExperienceServiceImpl implements ExperienceService {
 
     @Override
     public List<Experience> searchExperiences(String keyword) {
-        
+
         List<Experience> experiences = new ArrayList<>();
 
         // search experience in experiences keywords
         List<Experience> allExperiences = experienceRepository.findAll();
 
-        for(Experience experience : allExperiences)
-        {
+        for (Experience experience : allExperiences) {
             List<String> all_keywords = experience.getKeywords();
 
             for (String k : all_keywords) {
@@ -153,7 +152,7 @@ public class ExperienceServiceImpl implements ExperienceService {
                 experiences.add(experience);
             }
         }
-        
+
         List<Category> categories = categoryRepository.findAll();
 
         for (Category category : categories) {
@@ -177,7 +176,13 @@ public class ExperienceServiceImpl implements ExperienceService {
                 experiences.addAll(job.getExperiences());
             }
         }
-        
+
         return experiences;
+    }
+    
+    @Override
+    public List<Experience> getAlumniExperiences(String id) {
+        User user = userRepository.findById(id).get();
+        return user.getExperiences();
     }
 }

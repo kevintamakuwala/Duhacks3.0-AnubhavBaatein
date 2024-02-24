@@ -14,4 +14,6 @@ public interface ExperienceService {
     public Experience updateExperienceById(Experience experience, String experienceId);
 
     public List<Experience> searchExperiences(String keyword);
+
+    public List<Experience> getAlumniExperiences(String id);
 }
