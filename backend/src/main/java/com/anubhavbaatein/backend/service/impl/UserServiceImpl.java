@@ -29,6 +29,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(userId).get();
     }
 
+
     @Override
     public User addUser(User user) {
         return userRepository.save(user);
@@ -67,4 +68,25 @@ public class UserServiceImpl implements UserService {
         int maxUsers = 4;
         return users.subList(0, Math.min(maxUsers, users.size()));
     }
+
+    @Override
+    public List<User> getAlumni() {
+        return userRepository.findByIsAlumni();
+    }
+
+    @Override
+    public List<User> searchAlumni(String keyword) {
+        List<User> alumni = userRepository.findByIsAlumni();
+
+        for (int i = 0; i < alumni.size(); i++) {
+            if (!alumni.get(i).getName().toLowerCase().contains(keyword.toLowerCase())) {
+                alumni.remove(i);
+                i--;
+            }
+        }
+
+        return alumni;
+    }
+
+
 }

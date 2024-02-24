@@ -12,7 +12,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -48,5 +47,4 @@ public class Experience {
 
     @ManyToMany
     private List<Category> categories = new ArrayList<>();
-
 }

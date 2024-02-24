@@ -47,6 +47,26 @@ public class UserController {
         }
     }
 
+    @GetMapping("/user/alumni")
+    public ResponseEntity<List<User>> getAlumni() {
+        try {
+            List<User> alumni = userService.getAlumni();
+            return new ResponseEntity<>(alumni, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/search/alumni")
+    public ResponseEntity<List<User>> searchAlumni(@RequestBody String keyword) {
+        try {
+            List<User> alumni = userService.searchAlumni(keyword);
+            return new ResponseEntity<>(alumni, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/user")
     public ResponseEntity<User> addUser(@RequestBody UserReq data) {
         System.out.println(data.getId());

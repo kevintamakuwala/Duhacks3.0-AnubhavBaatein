@@ -28,8 +28,6 @@ function Home() {
                     </div>
                     <img className="  mt-4 lg:w-[50%] sm:w-[44%] lg:mb-16" src={vector} alt="SVG Image" />
                 </div>
-
-
                 <div>
                     <Static_Card />
                 </div>
