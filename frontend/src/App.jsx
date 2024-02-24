@@ -14,6 +14,7 @@ import Footer from "./custom_components/Footer";
 import Home from "./Pages/Home";
 import PostExperience from "./Pages/PostExperience";
 import { auth } from "./config/firebase";
+import Contact from "./Pages/Contact";
 
 export const AppContext = createContext();
 
@@ -49,6 +50,7 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/experiences" element={<Experiences/>} />
             <Route path="/postexperience" element={<PostExperience />} />
+            <Route path="/contact" element={<Contact />} />
           </Routes>
       </div>
         <Footer />

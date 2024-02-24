@@ -7,8 +7,12 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { useNavigate } from "react-router-dom";
 
 export function UserProfile() {
+
+  const navigate = useNavigate();
+
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
@@ -33,16 +37,20 @@ export function UserProfile() {
           <small className="text-sm font-medium leading-none">Address :</small>
           <p className="text-muted-foreground text-sm shadcn-light">India</p>
 
-            <p>
-                          {/* <EditProfile /> */}
-                          Edit Profile
-            </p>
-            <div className="flex items-center pt-2">
-              <CalendarIcon className="mr-2 h-4 w-4 opacity-70" />{" "}
-              <span className="text-xs text-muted-foreground">
-                Joined December 2021
-              </span>
-            </div>
+           
+          <div className="flex gap-2">
+
+            <Button variant='outline'  onClick={()=>{
+              navigate("/")
+            }}>Edit Profile</Button>
+            
+           
+
+            <Button className="bg-blue-500 hover:bg-blue-600 block sm:hidden" onClick={()=>{
+              navigate("/postexperience")
+            }}>Share Experince</Button>
+          </div>
+
           </div>
         </div>
       </HoverCardContent>
