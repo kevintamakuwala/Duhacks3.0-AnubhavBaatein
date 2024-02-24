@@ -35,6 +35,8 @@ public class User {
 
     private String github;
 
+    private String role;
+
     @JsonIgnore
     @OneToMany(mappedBy = "user",cascade=CascadeType.ALL )
     private List<Experience> experiences = new ArrayList<>();

@@ -59,7 +59,7 @@ public class UserController {
             user.setLinkedin(data.getLinkedin());
             user.setName(data.getName());
             user.setPhone(data.getPhone());
-
+            user.setRole(data.getRole());
             List<String> experienceIds = data.getExperiencesId();
 
             for (String experienceId : experienceIds) {
@@ -86,7 +86,7 @@ public class UserController {
                 user.setLinkedin(data.getLinkedin());
                 user.setName(data.getName());
                 user.setPhone(data.getPhone());
-
+                user.setRole(data.getRole());
                 List<String> experienceIds = data.getExperiencesId();
 
                 for (String experienceId : experienceIds) {
