@@ -37,7 +37,7 @@ const PopularCategory = () => {
                     {category.map((category, index) => (
                         <div key={index}>
                             <div className=" flex items-center space-x-4 rounded-md border p-4">
-                                <BellIcon />
+                                
                                 <div className="flex-1 space-y-1">
                                     <p className="text-sm font-medium leading-none">
                                         {category.title}

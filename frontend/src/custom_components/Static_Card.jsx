@@ -6,7 +6,7 @@ function Static_Card() {
         <dl class="grid grid-cols-1 gap-x-8 gap-y-16 text-center lg:grid-cols-4">
           <div class="mx-auto flex max-w-xs flex-col gap-y-4">
             <dt class="text-base leading-7 text-gray-600">
-              Transactions every 24 hours
+              Total Alumni
             </dt>
             <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
               44 million
@@ -14,15 +14,15 @@ function Static_Card() {
           </div>
           <div class="mx-auto flex max-w-xs flex-col gap-y-4">
             <dt class="text-base leading-7 text-gray-600">
-              Assets under holding
+              Top Companies
             </dt>
             <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
-              $119 trillion
+              44 million
             </dd>
-          </div>
+          </div>  
           <div class="mx-auto flex max-w-xs flex-col gap-y-4">
             <dt class="text-base leading-7 text-gray-600">
-              New users annually
+              New Users Annually
             </dt>
             <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
               46,000
@@ -30,7 +30,7 @@ function Static_Card() {
                 </div>
                 <div class="mx-auto flex max-w-xs flex-col gap-y-4">
             <dt class="text-base leading-7 text-gray-600">
-              New users annually
+                Total Experiences Shared
             </dt>
             <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
               46,000
