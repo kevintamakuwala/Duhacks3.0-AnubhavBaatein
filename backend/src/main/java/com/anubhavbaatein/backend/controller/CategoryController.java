@@ -1,13 +1,17 @@
 package com.anubhavbaatein.backend.controller;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+
 import com.anubhavbaatein.backend.Request.CategoryReq;
 import com.anubhavbaatein.backend.model.Category;
 import com.anubhavbaatein.backend.service.CategoryService;
 import com.anubhavbaatein.backend.service.ExperienceService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
@@ -20,55 +24,56 @@ public class CategoryController {
     private ExperienceService experienceService;
 
     @GetMapping("/category")
-    public List<String> getCategories() {
+    public ResponseEntity<List<String>> getCategories() {
         try {
             List<Category> categories = categoryService.getCategories();
             List<String> categoryTitles = new ArrayList<>();
-
             for (Category category : categories) {
                 categoryTitles.add(category.getTitle());
             }
-
-            return categoryTitles;
+            return new ResponseEntity<>(categoryTitles, HttpStatus.OK);
         } catch (Exception e) {
-            System.out.println(e);
-            return null;
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/category/{id}")
-    public Category getCategoryById(@PathVariable("id") String id) {
-        try{
+    public ResponseEntity<Category> getCategoryById(@PathVariable("id") String id) {
+        try {
             Category category = categoryService.getCategoriesById(id);
-            return category;
-        }
-        catch (Exception e) {
-            System.out.println(e);
-            return null;
+            if (category != null) {
+                return new ResponseEntity<>(category, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     // get category by title
     @GetMapping("/category/title/{title}")
-    public Category getCategoryByTitle(@PathVariable("title") String title) {
+    public ResponseEntity<Category> getCategoryByTitle(@PathVariable("title") String title) {
         try {
             Category category = categoryService.getCategoryByTitle(title);
-            return category;
+            if (category != null) {
+                return new ResponseEntity<>(category, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         } catch (Exception e) {
-            System.out.println(e);
-            return null;
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PostMapping("/category")
-    public Category addCategory(@RequestBody CategoryReq data) {
-
+    public ResponseEntity<Category> addCategory(@RequestBody CategoryReq data) {
         try {
             Category newCategory = new Category();
 
             String uniqueId = UUID.randomUUID().toString();
             newCategory.setId(uniqueId);
-            newCategory.setTitle(data.getCategoryTitle());
+            newCategory.setTitle(data.getTitle());
 
             List<String> experiences = data.getExperiences();
 
@@ -76,40 +81,49 @@ public class CategoryController {
                 newCategory.getExperiences().add(experienceService.getExperienceById(experienceId));
             }
 
-            return categoryService.addCategory(newCategory);
+            categoryService.addCategory(newCategory);
+            return new ResponseEntity<>(newCategory, HttpStatus.OK);
         } catch (Exception e) {
-            System.out.println(e);
-            return null;
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PutMapping("/category/{id}")
-    public Category updateCategoryById(@RequestBody CategoryReq data, @PathVariable("id") String id) {
+    public ResponseEntity<Category> updateCategoryById(@RequestBody CategoryReq data, @PathVariable("id") String id) {
         try {
             Category category = categoryService.getCategoriesById(id);
+            if (category != null) {
+                category.setTitle(data.getTitle());
 
-            category.setTitle(data.getCategoryTitle());
-            
-            List<String> experiences = data.getExperiences();
+                List<String> experiences = data.getExperiences();
 
-            for (String experienceId : experiences) {
-                category.getExperiences().add(experienceService.getExperienceById(experienceId));
+                for (String experienceId : experiences) {
+                    category.getExperiences().add(experienceService.getExperienceById(experienceId));
+                }
+
+                categoryService.updateCategoryById(category, id);
+                return new ResponseEntity<>(category, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
-
-            return categoryService.updateCategoryById(category, id);
         } catch (Exception e) {
-            System.out.println(e);
-            return null;
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @DeleteMapping("/category/{id}")
-    public boolean deleteCategoryById(@PathVariable("id") String id) {
+    public ResponseEntity<Void> deleteCategoryById(@PathVariable("id") String id) {
         try {
-            return categoryService.deleteCategoryById(id);
+            boolean isDeleted = categoryService.deleteCategoryById(id);
+            if (isDeleted) {
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         } catch (Exception e) {
-            System.out.println(e);
-            return false;
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

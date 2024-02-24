@@ -30,6 +30,8 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public boolean deleteCompanyById(String companyId) {
+        Company company = getCompanyById(companyId);
+        if (company == null) return false;
         companyRepository.deleteById(companyId);
         return true;
     }

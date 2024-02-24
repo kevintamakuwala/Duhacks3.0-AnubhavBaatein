@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CategoryReq {
 
-    private String categoryTitle;
+    private String title;
 
     private List<String> experiences = new ArrayList<>();
     
