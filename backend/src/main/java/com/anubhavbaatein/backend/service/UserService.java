@@ -14,4 +14,6 @@ public interface UserService {
     public User updateUserById(User user, String userId);
     
     public User getUserByEmail(String email);
+
+    public List<User> getTopUsers();
 }

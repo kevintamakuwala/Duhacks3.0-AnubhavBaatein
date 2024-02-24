@@ -1,17 +1,23 @@
 package com.anubhavbaatein.backend.service.impl;
 
+import com.anubhavbaatein.backend.model.Experience;
 import com.anubhavbaatein.backend.model.User;
+import com.anubhavbaatein.backend.repository.ExperienceRepository;
 import com.anubhavbaatein.backend.repository.UserRepository;
 import com.anubhavbaatein.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ExperienceRepository experienceRepository;
 
     @Override
     public List<User> getUsers() {
@@ -42,5 +48,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email).get();
+    }
+
+    @Override
+    public List<User> getTopUsers() {
+        Map<String, Integer> userExperiencesCount = new HashMap<>();
+        List<Experience> experiences = experienceRepository.findAll();
+        for (Experience experience : experiences) {
+            String userId = experience.getUser().getId();
+            userExperiencesCount.put(userId, userExperiencesCount.getOrDefault(userId, 0) + 1);
+        }
+        List<User> users = userRepository.findAll();
+        users.sort((u1, u2) -> {
+            long a = userExperiencesCount.getOrDefault(u1.getId(), 0);
+            long b = userExperiencesCount.getOrDefault(u2.getId(), 0);
+            return Long.compare(b, a);
+        });
+        int maxUsers = 4;
+        return users.subList(0, Math.min(maxUsers, users.size()));
     }
 }

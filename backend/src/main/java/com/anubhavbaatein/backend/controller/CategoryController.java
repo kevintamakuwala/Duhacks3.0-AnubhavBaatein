@@ -2,6 +2,7 @@ package com.anubhavbaatein.backend.controller;
 
 import com.anubhavbaatein.backend.Request.CategoryReq;
 import com.anubhavbaatein.backend.model.Category;
+import com.anubhavbaatein.backend.model.Company;
 import com.anubhavbaatein.backend.service.CategoryService;
 import com.anubhavbaatein.backend.service.ExperienceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,6 +127,11 @@ public class CategoryController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/top-categories")
+    public ResponseEntity<List<Category>> getTopCategories() {
+        return ResponseEntity.ok(categoryService.getTopCategories());
     }
 
 }

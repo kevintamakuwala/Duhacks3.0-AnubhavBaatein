@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:5173" , allowedHeaders = "*" , allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*", allowCredentials = "true")
 public class UserController {
 
     @Autowired
@@ -117,5 +117,10 @@ public class UserController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/top-users")
+    public ResponseEntity<List<User>> getTopUsers() {
+        return ResponseEntity.ok(userService.getTopUsers());
     }
 }

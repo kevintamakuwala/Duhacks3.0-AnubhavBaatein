@@ -14,4 +14,6 @@ public interface CategoryService {
     public Category updateCategoryById(Category category, String categoryId);
     
     public Category getCategoryByTitle(String name);
+
+    public List<Category> getTopCategories();
 }

@@ -17,7 +17,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:5173" , allowedHeaders = "*" , allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*", allowCredentials = "true")
 public class CompanyController {
     @Autowired
     private CompanyService companyService;
@@ -141,4 +141,10 @@ public class CompanyController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/top-companies")
+    public ResponseEntity<List<Company>> getTopCompanies() {
+        return ResponseEntity.ok(companyService.getTopCompanies());
+    }
+
 }

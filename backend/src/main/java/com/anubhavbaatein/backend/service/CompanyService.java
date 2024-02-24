@@ -14,4 +14,6 @@ public interface CompanyService {
     public Company updateCompanyById(Company company, String companyId);
 
     public Company getCompanyByName(String name);
+
+    public List<Company> getTopCompanies();
 }
