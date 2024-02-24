@@ -106,9 +106,6 @@ public class CompanyController {
                 List<String> jobIds = data.getJobsId();
                 List<String> experienceIds = data.getExperiencesId();
 
-                existingCompany.getJobs().clear();
-                existingCompany.getExperiences().clear();
-
                 for (String jobId : jobIds) {
                     Job job = jobService.getJobById(jobId);
                     existingCompany.getJobs().add(job);

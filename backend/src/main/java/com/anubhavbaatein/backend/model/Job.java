@@ -1,6 +1,8 @@
 package com.anubhavbaatein.backend.model;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,6 +32,7 @@ public class Job {
     @ManyToOne
     private Company company;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
     private List<Experience> experiences = new ArrayList<>();
 }
