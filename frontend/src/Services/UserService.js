@@ -44,9 +44,38 @@ export const deleteUser = async (id) => {
 };
 
 export const searchAlumni = async (keyword) => {
-  const response = await Axios.gte(`${url}/user/alumni`).then((res) => {
+  const response = await Axios.get(`${url}/search/alumni`,keyword).then((res) => {
     console.log(res.data);
     return res.data;
   });
   return response;
 };
+
+export const searchExperience = async (keyword) => {
+  const response = await Axios.get(`${url}/search`,keyword).then((res) => {
+    console.log(res.data);
+    return res.data;
+  });
+
+  return response;
+};
+
+export const topCategory = async () => {
+  const response = await Axios.get(`${url}/top-categories`,).then((res) => {
+    console.log(res.data);
+    return res.data;
+  });
+
+  return response;
+};
+
+export const topCompanies = async () => {
+  const response = await Axios.get(`${url}/top-companies`,).then((res) => {
+    console.log(res.data);
+    return res.data;
+  });
+
+  return response;
+};
+
+
