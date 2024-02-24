@@ -21,8 +21,8 @@ import * as z from "zod";
 import { Form, FormMessage } from "../components/ui/form";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { AppContext } from "../App";
-// import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-// import { auth, googleProvider } from "@/config/firebase";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "@/config/firebase";
 import { useNavigate } from "react-router-dom";
 
 const formSchema = z.object({
@@ -47,18 +47,18 @@ export function Login() {
     },
   });
 
-//   async function signInWithGoogle() {
-//     try {
-//         await signInWithPopup(auth, googleProvider).then((response) => {
-//         localStorage.setItem("user", JSON.stringify(response.user));
-//         setIsLoggedIn(true);
-//         setUser(response.user);
-//         navigate("/");
-//       });
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
+  async function signInWithGoogle() {
+    try {
+        await signInWithPopup(auth, googleProvider).then((response) => {
+        localStorage.setItem("user", JSON.stringify(response.user));
+        setIsLoggedIn(true);
+        setUser(response.user);
+        navigate("/");
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function onSubmit(values) {
     if (values.email && values.password) {
@@ -68,14 +68,14 @@ export function Login() {
       };
 
       console.log(data);
-    //   await signInWithEmailAndPassword(auth, data.username, data.password)
-    //       .then((response) => {
-    //         localStorage.setItem("user", JSON.stringify(response.user));
-    //       setIsLoggedIn(true);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
+      await signInWithEmailAndPassword(auth, data.username, data.password)
+          .then((response) => {
+            localStorage.setItem("user", JSON.stringify(response.user));
+          setIsLoggedIn(true);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   }
 

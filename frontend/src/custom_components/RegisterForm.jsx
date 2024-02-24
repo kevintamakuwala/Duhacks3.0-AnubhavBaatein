@@ -2,8 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import * as React from "react";
-// import { auth, googleProvider } from "../config/firebase";
-// import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "../config/firebase";
+import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "@/App";
 
@@ -20,29 +20,29 @@ export function RegisterForm() {
       
       console.log(email + " " + password);
 
-    // try {
-    //   await createUserWithEmailAndPassword(auth, email, password).then(
-    //     (response) => {
-    //       setIsLoggedIn(true);
-    //       setUser(response.user);
-    //       navigate("/");
-    //     }
-    //   );
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      await createUserWithEmailAndPassword(auth, email, password).then(
+        (response) => {
+          setIsLoggedIn(true);
+          setUser(response.user);
+          navigate("/");
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-//   async function signInWithGoogle() {
-//     try {
-//       await signInWithPopup(auth, googleProvider).then((response) => {
-//         setIsLoggedIn(true);
-//         navigate("/");
-//       });
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
+  async function signInWithGoogle() {
+    try {
+      await signInWithPopup(auth, googleProvider).then((response) => {
+        setIsLoggedIn(true);
+        navigate("/");
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className="grid gap-6">
