@@ -67,7 +67,7 @@ export function CarouselList() {
   ];
   return (
     <Carousel
-      className="flex items-center justify-center flex-col w-10/12 md:h-auto md:flex-row py-9" 
+      className="flex items-center justify-center flex-col w-auto md:h-auto md:flex-row py-9" 
     >
       <CarouselContent>
         {testimonials.map((testimonial, index) => (

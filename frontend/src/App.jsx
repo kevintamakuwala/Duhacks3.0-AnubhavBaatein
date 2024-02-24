@@ -16,6 +16,7 @@ import PostExperience from "./Pages/PostExperience";
 import Alumni from "./Pages/Alumni";
 // import { auth } from "./config/firebase";
 import { auth } from "./config/firebase";
+import Contact from "./Pages/Contact";
 
 export const AppContext = createContext();
 
@@ -52,6 +53,7 @@ export default function App() {
             <Route path="/experiences" element={<Experiences/>} />
             <Route path="/postexperience" element={<PostExperience />} />
             <Route path="/alumni" element={<Alumni/>}/>
+            <Route path="/contact" element={<Contact />} />
           </Routes>
       </div>
         <Footer />
