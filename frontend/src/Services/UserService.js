@@ -78,4 +78,11 @@ export const topCompanies = async () => {
   return response;
 };
 
+export const topTestimonials = async () => {
+  const response = await Axios.get(`${url}/top-users`,).then((res) => {
+    console.log(res.data);
+    return res.data;
+  });
 
+  return response;
+};
