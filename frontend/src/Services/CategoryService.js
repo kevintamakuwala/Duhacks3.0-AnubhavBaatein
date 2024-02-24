@@ -40,3 +40,12 @@ export const deleteCategory = async (id) => {
   });
   return response;
 };
+
+export const topCategory = async () => {
+  const response = await Axios.get(`${url}/top-categories`,).then((res) => {
+    console.log(res.data);
+    return res.data;
+  });
+
+  return response;
+};

@@ -41,3 +41,12 @@ export const deleteExperience = async (id) => {
   });
   return response;
 };
+
+export const searchExperience = async (keyword) => {
+  const response = await Axios.get(`${url}/search`,keyword).then((res) => {
+    console.log(res.data);
+    return res.data;
+  });
+
+  return response;
+};
