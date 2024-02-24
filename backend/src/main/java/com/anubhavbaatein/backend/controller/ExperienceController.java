@@ -57,7 +57,7 @@ public class ExperienceController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Experience>> searchExperience(@RequestParam String keyword) {
+    public ResponseEntity<List<Experience>> searchExperience(@RequestBody String keyword) {
         try {
             List<Experience> experience = experienceService.searchExperiences(keyword);
             return new ResponseEntity<>(experience, HttpStatus.OK);

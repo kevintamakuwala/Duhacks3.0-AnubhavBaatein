@@ -58,7 +58,7 @@ public class UserController {
     }
 
     @GetMapping("/search/alumni")
-    public ResponseEntity<List<User>> searchAlumni(@RequestParam String keyword) {
+    public ResponseEntity<List<User>> searchAlumni(@RequestBody String keyword) {
         try {
             List<User> alumni = userService.searchAlumni(keyword);
             return new ResponseEntity<>(alumni, HttpStatus.OK);
