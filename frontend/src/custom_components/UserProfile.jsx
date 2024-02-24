@@ -41,8 +41,8 @@ export function UserProfile() {
           <div className="flex gap-2">
 
             <Button variant='outline'  onClick={()=>{
-              navigate("/")
-            }}>Edit Profile</Button>
+              navigate("/settings")
+            }}>Settings</Button>
             
            
 

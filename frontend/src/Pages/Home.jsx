@@ -41,7 +41,7 @@ function Home() {
                 <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-3xl">Top Category</h2>
                 <PopularCategory />
                 <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-3xl">Top Testimonials</h2>
-                
+                <Testimonial />
             </div>
         </div>
     );

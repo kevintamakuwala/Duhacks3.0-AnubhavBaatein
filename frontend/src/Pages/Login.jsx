@@ -83,7 +83,7 @@ export function Login() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="my-10">
         <Card className="w-[350px]">
           <CardHeader>
             <CardTitle>Login</CardTitle>

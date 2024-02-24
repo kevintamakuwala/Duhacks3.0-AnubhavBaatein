@@ -81,12 +81,12 @@ const PostExperience = () => {
                     <Textarea id="description" placeholder="Type a detailed description of the interview/experience..." />
                 </div>
 
-                <div className='flex flex-col sm:flex-row'>
+                <div className='grid grid-rows-1 md:grid-cols-3 w-full'>
 
-                    <div className="grid w-full items-center gap-3 mt-5">
+                    <div className="grid md:w-full items-center gap-3 mt-5">
                         <Label htmlFor="difficulty">Difficulty Level</Label>
                         <Select id="difficulty">
-                            <SelectTrigger className="w-[15rem]">
+                            <SelectTrigger >
                                 <SelectValue placeholder="Select Difficulty Level" />
                             </SelectTrigger>
                             <SelectContent>
@@ -100,10 +100,10 @@ const PostExperience = () => {
                     </div>
 
 
-                    <div className="grid w-full items-center gap-3 mt-5">
+                    <div className="grid md:w-full items-center gap-3 mt-5 md:pl-3">
                         <Label htmlFor="interviewmonth">Interview Month</Label>
                         <Select id="interviewmonth">
-                            <SelectTrigger className="w-[15rem]">
+                            <SelectTrigger>
                                 <SelectValue placeholder="Select Interview Month" />
                             </SelectTrigger>
                             <SelectContent>
@@ -118,7 +118,7 @@ const PostExperience = () => {
                         </Select>
                     </div>
 
-                    <div className="grid w-full items-center gap-3 mt-5">
+                    <div className="grid md:w-full items-center gap-3 mt-5 md:pl-3">
                         <Label htmlFor="rounds">No. of Rounds</Label>
                         <Input type="number" id="rounds" placeholder="Enter No. of Interview Rounds" />
                     </div>
