@@ -14,13 +14,13 @@ public class UserReq {
 
     private String id;
 
-    private String userName;
+    private String name;
 
-    private String phoneNumber;
+    private String phone;
 
     private String email;
 
-    private String currentCompanyName;
+    private String currentCompany;
 
     private String linkedin;
 
