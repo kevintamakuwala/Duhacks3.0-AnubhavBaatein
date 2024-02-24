@@ -1,41 +1,31 @@
 import React from 'react';
+import { IoIosMail } from "react-icons/io";
 
 const Footer = () => (
-  <footer className="bg-gray-800 text-white py-8">
-  <div className="container mx-auto px-4">
-    <div className="flex flex-col md:flex-row items-center justify-between">
-      <div className="text-lg mb-4 md:mb-0">
-        <span className="font-bold">Jobpilot</span> <span className="text-gray-400">- Job Portal</span>
+  <footer className="bg-gray-800 text-white  flex flex-col justify-between items-center">
+  <div className="container flex justify-between sm:flex-row flex-col mx-auto px-4 py-6">
+    <div className="flex flex-col sm:justify-evenly ">
+      <div className="text-xl  md:mb-0">
+        <span className="font-bold">AnubhavBaatein</span> <span className="text-gray-400"></span>
       </div>
-      <div className="text-sm text-gray-400">
-        <p>Call now: (319) 555-0115</p>
-        <p>6391 Elgin St. Celina, Delaware 10299, New York, United States of America</p>
-        <p>&copy; 2021 Jobpilot - All rights reserved</p>
-      </div>
-    </div>
+      
+    
     <div className="mt-8">
-      <ul className="flex flex-wrap text-sm text-gray-400">
+      <ul className="flex flex-wrap flex-col text-md text-gray-400">
         <li className="mr-6 mb-4"><a href="#">About</a></li>
         <li className="mr-6 mb-4"><a href="#">Contact</a></li>
-        <li className="mr-6 mb-4"><a href="#">Pricing</a></li>
-        <li className="mr-6 mb-4"><a href="#">Blog</a></li>
-        <li className="mr-6 mb-4"><a href="#">Candidate</a></li>
-        <li className="mr-6 mb-4"><a href="#">Browse Jobs</a></li>
-        <li className="mr-6 mb-4"><a href="#">Browse Employers</a></li>
-        <li className="mr-6 mb-4"><a href="#">Candidate Dashboard</a></li>
-        <li className="mr-6 mb-4"><a href="#">Saved Jobs</a></li>
-        <li className="mr-6 mb-4"><a href="#">Employers</a></li>
-        <li className="mr-6 mb-4"><a href="#">Post a Job</a></li>
-        <li className="mr-6 mb-4"><a href="#">Browse Candidates</a></li>
-        <li className="mr-6 mb-4"><a href="#">Employers Dashboard</a></li>
-        <li className="mr-6 mb-4"><a href="#">Applications</a></li>
-        <li className="mr-6 mb-4"><a href="#">Support</a></li>
-        <li className="mr-6 mb-4"><a href="#">Faqs</a></li>
-        <li className="mr-6 mb-4"><a href="#">Privacy Policy</a></li>
-        <li className="mr-6 mb-4"><a href="#">Terms & Conditions</a></li>
       </ul>
     </div>
+    </div>
+
+    <div className="text-sm flex flex-col space-y-2 text-gray-400 mt-8 sm:mt-14">
+        <p className='flex justify-start items-center gap-1'><IoIosMail />prajapatiashish40567@gmail.com</p>
+        <p className='flex justify-Start items-center gap-1'><IoIosMail />kevintamakuwala16@gmail.com</p>
+        <p className='flex justify-start items-center gap-1'><IoIosMail />dhruvishavaghani0509@gmail.com</p>
+        <p className='flex justify-start items-center gap-1'><IoIosMail />akshayvaghasiya3636@gmail.com</p>
+      </div>
   </div>
+  <p className='text-sm text-gray-400'>&copy; AnubhavBaatein - All rights reserved</p>
 </footer>
 
 

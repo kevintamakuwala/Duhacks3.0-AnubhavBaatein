@@ -66,6 +66,16 @@ public class ExperienceController {
         }
     }
 
+    @GetMapping("/experience/alumni/{id}")
+    public ResponseEntity<List<Experience>> getAlumniExperience(@PathVariable("id") String id) {
+        try {
+            List<Experience> experience = experienceService.getAlumniExperiences(id);
+            return new ResponseEntity<>(experience, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/experience")
     public ResponseEntity<Experience> addExperience(@RequestBody ExperienceReq data) {
         try {
