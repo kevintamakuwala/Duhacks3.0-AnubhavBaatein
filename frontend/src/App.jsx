@@ -40,24 +40,27 @@ export default function App() {
     };
   }, []);
 
+  const location = window.location.pathname;
+
   return (
     <AppContext.Provider value={{ isLoggedIn, setIsLoggedIn , user , setUser }}>
         <Router>
-          <Navbar />
+          {isLoggedIn && location !== '/register' && location !== '/login' &&  <Navbar />}
       <div className="flex justify-center items-center h-full">
           <Routes>
             <Route path="/" element={isLoggedIn ? <Home/> : <Login/>}/>
-            <Route path="/settings" element={<Settings/>} />
+            <Route path="/settings" element={isLoggedIn ? <Settings/> : <Login/>} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/experiences" element={<Experiences/>} />
-            <Route path="/postexperience" element={<PostExperience />} />
+            <Route path="/post-experience" element={isLoggedIn ? <PostExperience /> : <Login/>} />
             <Route path="/alumni" element={<Alumni/>}/>
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/contact" element={isLoggedIn ? <Contact /> : <Login/>} />
           </Routes>
       </div>
-        <Footer />
+        {isLoggedIn && location !== '/register' && location !== '/login' &&  <Footer />}
         </Router>
     </AppContext.Provider>
   );
+
 }
