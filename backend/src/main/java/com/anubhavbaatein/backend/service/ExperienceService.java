@@ -12,4 +12,6 @@ public interface ExperienceService {
     public boolean deleteExperienceById(String experienceId);
 
     public Experience updateExperienceById(Experience experience, String experienceId);
+
+    public List<Experience> searchExperiences(String keyword);
 }

@@ -1,6 +1,8 @@
 package com.anubhavbaatein.backend.model;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -33,6 +35,9 @@ public class User {
 
     private String github;
 
+    private String role;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "user",cascade=CascadeType.ALL )
     private List<Experience> experiences = new ArrayList<>();
 }

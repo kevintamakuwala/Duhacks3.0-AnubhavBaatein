@@ -24,7 +24,7 @@ const Navbar = () => {
         <div className="sm:mr-6 flex items-center">
             <UserProfile />
             <Button className="bg-blue-500 hover:bg-blue-600 hidden sm:block" onClick={()=>{
-              navigate("/postexperience")
+              navigate("/post-experience")
             }}>Share Experince</Button>
           </div>
       </div>

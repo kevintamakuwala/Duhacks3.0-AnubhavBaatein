@@ -16,13 +16,12 @@ function Home() {
                 <div className="w-auto md:h-auto flex flex-col sm:flex-row items-center">
                     <div className="flex flex-col lg:gap-48 justify-between md:max-h-fit">
                         <h1 className="scroll-m-20 text-4xl font-semibold tracking-tight lg:text-5xl sm:mx-[10%] mt-5 mx-3">
-                            Find Job that suits your interest & skills
+                            One step closer to your Dream company
                         </h1>
 
                         <div className="w-fit lg:mt-0 mt-10 sm:mx-[10%] sm:mr-[25%]">
                             <p className="mb-5 mx-3">
-                                Aliquam vitae turpis in diam convallis finibus in at risus. Nullam
-                                in scelerisque leo, eget sollicitudin velit bestibulum.
+                                Find the alumni working at your dream Companies ,dive into their experiences ,connect with them and much more
                             </p>
                             <Search />
                         </div>
@@ -41,7 +40,7 @@ function Home() {
                 <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-3xl">Top Category</h2>
                 <PopularCategory />
                 <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-3xl">Top Testimonials</h2>
-                
+                <Testimonial/>
             </div>
         </div>
     );

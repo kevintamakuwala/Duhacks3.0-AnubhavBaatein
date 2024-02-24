@@ -37,7 +37,8 @@ public class JobServiceImpl implements JobService {
             company.getJobs().add(job);
             companyRepository.save(company);
         }
-
+        System.out.println(company);
+        System.out.println(job);
         return jobRepository.save(job);
     }
 

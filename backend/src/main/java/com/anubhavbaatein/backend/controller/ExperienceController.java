@@ -1,23 +1,20 @@
 package com.anubhavbaatein.backend.controller;
+
+import com.anubhavbaatein.backend.Request.ExperienceReq;
+import com.anubhavbaatein.backend.model.*;
+import com.anubhavbaatein.backend.service.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import com.anubhavbaatein.backend.Request.ExperienceReq;
-import com.anubhavbaatein.backend.model.Category;
-import com.anubhavbaatein.backend.model.Company;
-import com.anubhavbaatein.backend.model.Experience;
-import com.anubhavbaatein.backend.model.Job;
-import com.anubhavbaatein.backend.model.User;
-import com.anubhavbaatein.backend.service.CategoryService;
-import com.anubhavbaatein.backend.service.CompanyService;
-import com.anubhavbaatein.backend.service.ExperienceService;
-import com.anubhavbaatein.backend.service.JobService;
-import com.anubhavbaatein.backend.service.UserService;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:5173" , allowedHeaders = "*" , allowCredentials = "true")
 public class ExperienceController {
 
     @Autowired
@@ -36,29 +33,41 @@ public class ExperienceController {
     private CompanyService companyService;
 
     @GetMapping("/experience")
-    public List<Experience> getExperience() {
+    public ResponseEntity<List<Experience>> getExperience() {
         try {
             List<Experience> experience = experienceService.getExperiences();
-            return experience;
+            return new ResponseEntity<>(experience, HttpStatus.OK);
         } catch (Exception e) {
-            System.out.println(e);
-            return null;
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
     @GetMapping("/experience/{id}")
-    public Experience getExperienceById(@PathVariable("id") String id) {
+    public ResponseEntity<Experience> getExperienceById(@PathVariable("id") String id) {
         try {
             Experience experience = experienceService.getExperienceById(id);
-            return experience;
+            if (experience != null) {
+                return new ResponseEntity<>(experience, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         } catch (Exception e) {
-            System.out.println(e);
-            return null;
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Experience>> searchExperience(@RequestParam String keyword) {
+        try {
+            List<Experience> experience = experienceService.searchExperiences(keyword);
+            return new ResponseEntity<>(experience, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/experience")
-    public Experience addExperience(@RequestBody ExperienceReq data) {
+    public ResponseEntity<Experience> addExperience(@RequestBody ExperienceReq data) {
         try {
             Experience newExperience = new Experience();
             String uniqueId = UUID.randomUUID().toString();
@@ -79,65 +88,88 @@ public class ExperienceController {
             newExperience.setCategories(categoryList);
 
             User user = userService.getUserById(data.getUserId());
+            System.out.println(data.getUserId());
             newExperience.setUser(user);
 
             Job job = jobService.getJobById(data.getJobId());
+            System.out.println(data.getJobId());
             newExperience.setJob(job);
 
+            System.out.println(data.getCompanyId());
             Company company = companyService.getCompanyById(data.getCompanyId());
+
             newExperience.setCompany(company);
 
-            return experienceService.addExperience(newExperience);
+            System.out.println("Hello");
+
+            for(Category category : newExperience.getCategories())
+            {
+                System.out.println(category.getId());
+            }
+
+            experienceService.addExperience(newExperience);
+
+            return new ResponseEntity<>(newExperience, HttpStatus.OK);
         } catch (Exception e) {
-            System.out.println(e);
-            return null;
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PutMapping("/experience/{id}")
-    public Experience updateExperienceById(@RequestBody ExperienceReq data, @PathVariable("id") String id) {
+    public ResponseEntity<Experience> updateExperienceById(@RequestBody ExperienceReq data, @PathVariable("id") String id) {
         try {
-            Experience experience = new Experience();
-            experience.setDescription(data.getDescription());
-            experience.setKeywords(data.getKeywords());
-            experience.setDifficultyLevel(data.getDifficultyLevel());
-            experience.setRounds(data.getRounds());
-            experience.setMonth(data.getMonth());
+            Experience experience = experienceService.getExperienceById(id);
 
-            List<String> categories = data.getCategories();
+            if (experience != null) {
+                experience.setDescription(data.getDescription());
+                experience.setKeywords(data.getKeywords());
+                experience.setDifficultyLevel(data.getDifficultyLevel());
+                experience.setRounds(data.getRounds());
+                experience.setMonth(data.getMonth());
 
-            List<Category> categoryList = new ArrayList<>();
-            for (String category : categories) {
-                Category temp = categoryService.getCategoryByTitle(category);
-                categoryList.add(temp);
+                List<String> categories = data.getCategories();
+
+                List<Category> categoryList = new ArrayList<>();
+                for (String category : categories) {
+                    Category temp = categoryService.getCategoryByTitle(category);
+                    categoryList.add(temp);
+                }
+                experience.setCategories(categoryList);
+
+                User user = userService.getUserById(data.getUserId());
+                experience.setUser(user);
+
+                Job job = jobService.getJobById(data.getJobId());
+                experience.setJob(job);
+
+                Company company = companyService.getCompanyById(data.getCompanyId());
+                experience.setCompany(company);
+
+                experienceService.updateExperienceById(experience, experience.getId());
+
+                return new ResponseEntity<>(experience, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
-            experience.setCategories(categoryList);
-
-            User user = userService.getUserById(data.getUserId());
-            experience.setUser(user);
-
-            Job job = jobService.getJobById(data.getJobId());
-            experience.setJob(job);
-
-            Company company = companyService.getCompanyById(data.getCompanyId());
-            experience.setCompany(company);
-
-            return experience;
         } catch (Exception e) {
-            System.out.println(e);
-            return null;
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @DeleteMapping("/experience/{id}")
-    public boolean deleteExperienceById(@PathVariable("id") String id) {
+    public ResponseEntity<Void> deleteExperienceById(@PathVariable("id") String id) {
         try {
-            boolean deleted = experienceService.deleteExperienceById(id);
-            return deleted;
+            boolean isDeleted = experienceService.deleteExperienceById(id);
+            if (isDeleted) {
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         } catch (Exception e) {
-            System.out.println(e);
-            return false;
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
 }

@@ -35,9 +35,8 @@ const formSchema = z.object({
 });
 
 export function Login() {
-
-    const navigate = useNavigate();
-  const { setIsLoggedIn , user , setUser } = React.useContext(AppContext);
+  const navigate = useNavigate();
+  const { setIsLoggedIn, user, setUser } = React.useContext(AppContext);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -49,7 +48,7 @@ export function Login() {
 
   async function signInWithGoogle() {
     try {
-        await signInWithPopup(auth, googleProvider).then((response) => {
+      await signInWithPopup(auth, googleProvider).then((response) => {
         localStorage.setItem("user", JSON.stringify(response.user));
         setIsLoggedIn(true);
         setUser(response.user);
@@ -69,8 +68,8 @@ export function Login() {
 
       console.log(data);
       await signInWithEmailAndPassword(auth, data.username, data.password)
-          .then((response) => {
-            localStorage.setItem("user", JSON.stringify(response.user));
+        .then((response) => {
+          localStorage.setItem("user", JSON.stringify(response.user));
           setIsLoggedIn(true);
         })
         .catch((error) => {
@@ -82,69 +81,105 @@ export function Login() {
   const time = new Date().getHours() < 12 ? "Morning" : "Afternoon";
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <Card className="w-[350px]">
-          <CardHeader>
-            <CardTitle>Login</CardTitle>
-            <CardDescription>
-              Good {time}, User! Ready to log in?
-            </CardDescription>
-          </CardHeader>
+    <div className="flex items-center justify-center h-screen">
+      <div className="flex-col">
+        <div className="flex-1 space-y-4 p-8 pt-6">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+              <Card className="w-[350px]">
+                <CardHeader>
+                  <CardTitle>Login</CardTitle>
+                  <CardDescription>
+                    Good {time}, User! Ready to log in?
+                  </CardDescription>
+                </CardHeader>
 
-          <CardContent>
-            <div className="grid w-full items-center gap-4">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <div className="flex flex-col space-y-1.5">
-                      <FormLabel htmlFor="email">Email</FormLabel>
-                      <FormControl>
-                        <Input placeholder="demo@gmail.com" {...field} />
-                      </FormControl>
+                <CardContent>
+                  <div className="grid w-full items-center gap-4">
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <div className="flex flex-col space-y-1.5">
+                            <FormLabel htmlFor="email">Email</FormLabel>
+                            <FormControl>
+                              <Input placeholder="demo@gmail.com" {...field} />
+                            </FormControl>
+                          </div>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="password"
+                      render={({ field }) => (
+                        <FormItem>
+                          <div className="flex flex-col space-y-1.5">
+                            <FormLabel htmlFor="password">Password</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="********"
+                                type={"password"}
+                                {...field}
+                              />
+                            </FormControl>
+                          </div>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </CardContent>
+                <CardFooter className="flex flex-col">
+                  {form.formState.isLoading || form.formState.isSubmitting ? (
+                    <Button disabled className="w-full">
+                      <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                      Please wait
+                    </Button>
+                  ) : (
+                    <Button type="submit" className="w-full border-2 mb-3 ">
+                      Submit
+                    </Button>
+                  )}
+                  <div className="w-full">
+                    <div className="relative">
+                      <div className="absolute inset-0 flex items-center">
+                        <span className="w-full border-t" />
+                      </div>
+                      <div className="relative flex justify-center text-xs uppercase">
+                        <span className="bg-background px-2 text-muted-foreground">
+                          Or continue with
+                        </span>
+                      </div>
                     </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <div className="flex flex-col space-y-1.5">
-                      <FormLabel htmlFor="password">Password</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="********"
-                          type={"password"}
-                          {...field}
+                    <Button
+                      variant="outline"
+                      type="button"
+                      onClick={signInWithGoogle}
+                      className="w-full mt-2 bg-white border border-gray-300 text-gray-900 hover:bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                    >
+                      <svg
+                        role="img"
+                        viewBox="0 0 24 24"
+                        className="mr-2 h-4 w-4"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
                         />
-                      </FormControl>
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          </CardContent>
-          <CardFooter className="flex flex-col">
-            {form.formState.isLoading || form.formState.isSubmitting ? (
-              <Button disabled className="w-full">
-                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-                Please wait
-              </Button>
-            ) : (
-              <Button type="submit" className="w-full border-2 mb-3 ">
-                Submit
-              </Button>
-            )}
-          </CardFooter>
-        </Card>
-      </form>
-    </Form>
+                      </svg>
+                      Google
+                    </Button>
+                  </div>
+                </CardFooter>
+              </Card>
+            </form>
+          </Form>
+        </div>
+      </div>
+    </div>
   );
 }

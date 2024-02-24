@@ -17,6 +17,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:5173" , allowedHeaders = "*" , allowCredentials = "true")
 public class CompanyController {
     @Autowired
     private CompanyService companyService;
@@ -105,9 +106,6 @@ public class CompanyController {
 
                 List<String> jobIds = data.getJobsId();
                 List<String> experienceIds = data.getExperiencesId();
-
-                existingCompany.getJobs().clear();
-                existingCompany.getExperiences().clear();
 
                 for (String jobId : jobIds) {
                     Job job = jobService.getJobById(jobId);

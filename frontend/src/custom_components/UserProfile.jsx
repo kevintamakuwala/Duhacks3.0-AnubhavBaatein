@@ -8,8 +8,47 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getUserById } from "@/Services/UserService";
 
 export function UserProfile() {
+  // const uid = JSON.parse(localStorage.getItem("user")).uid;
+  // console.log(uid);
+  const [user, setUser] = useState();
+
+  const getData = async () => {
+    await getUserById("124").then((response) => {
+      console.log(response);
+      setUser(response);
+    });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  let userDetails = [];
+  // iterate through user properties and display them
+  if (user) {
+    userDetails = Object.keys(user).map((key, index) => {
+      // first key is the id, so we skip it
+      if (key === "id") return null;
+
+      // display_key is the key with the first letter capitalized
+      let display_key = key.charAt(0).toUpperCase() + key.slice(1);
+
+      return (
+        <div key={index}>
+          <small className="text-sm font-medium leading-none">
+            {display_key} :{" "}
+          </small>
+          <p className="text-muted-foreground text-sm shadcn-light">
+            {user[key]}
+          </p>
+        </div>
+      );
+    });
+  }
 
   const navigate = useNavigate();
 
@@ -18,39 +57,37 @@ export function UserProfile() {
       <HoverCardTrigger asChild>
         <Button variant="link">
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" alt="@profile" />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarFallback>{user?.name[0]}</AvatarFallback>
           </Avatar>
         </Button>
       </HoverCardTrigger>
       <HoverCardContent className=" w-96">
         <div className="flex justify-between space-x-4">
-          
           <div className="space-y-2">
-          <h4 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-            Ashish Prajapati
-          </h4>
-          <small className="text-sm font-medium leading-none">Email address : </small>
-          <p className="text-muted-foreground text-sm shadcn-light">prajapatiashish40567@gmail.com</p>
-          <small className="text-sm font-medium leading-none">Phone no. : </small>
-          <p className="text-muted-foreground text-sm shadcn-light">1234567890</p>
-          <small className="text-sm font-medium leading-none">Address :</small>
-          <p className="text-muted-foreground text-sm shadcn-light">India</p>
+            <h4 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+              {user?.name}
+            </h4>
 
-           
-          <div className="flex gap-2">
+            {userDetails}
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  navigate("/settings");
+                }}
+              >
+                Edit Profile
+              </Button>
 
-            <Button variant='outline'  onClick={()=>{
-              navigate("/")
-            }}>Edit Profile</Button>
-            
-           
-
-            <Button className="bg-blue-500 hover:bg-blue-600 block sm:hidden" onClick={()=>{
-              navigate("/postexperience")
-            }}>Share Experince</Button>
-          </div>
-
+              <Button
+                className="bg-blue-500 hover:bg-blue-600 block sm:hidden"
+                onClick={() => {
+                  navigate("/post-experience");
+                }}
+              >
+                Share Experince
+              </Button>
+            </div>
           </div>
         </div>
       </HoverCardContent>
