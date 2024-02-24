@@ -56,6 +56,16 @@ public class ExperienceController {
         }
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<Experience>> searchExperience(@RequestParam String keyword) {
+        try {
+            List<Experience> experience = experienceService.searchExperiences(keyword);
+            return new ResponseEntity<>(experience, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/experience")
     public ResponseEntity<Experience> addExperience(@RequestBody ExperienceReq data) {
         try {
