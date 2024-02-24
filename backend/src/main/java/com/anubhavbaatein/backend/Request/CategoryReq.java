@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructo
+@NoArgsConstructor
 public class CategoryReq {
 
     private String title;
