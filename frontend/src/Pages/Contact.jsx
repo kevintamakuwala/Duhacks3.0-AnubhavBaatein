@@ -1,36 +1,49 @@
-import React, { useState } from 'react'
-// import { SMTPClient } from 'emailjs';
-
+import React, { useRef, useState } from 'react'
+import emailjs from "@emailjs/browser";
+import { error } from 'console';
 
 
 const Contact = () => {
 
-  // const client = new SMTPClient({
-  //   user: 'user',
-  //   password: 'password',a
-  //   host: 'smtp.your-email.com',
-  //   ssl: true,  
-  // });
+  const form = useRef();
 
   const [email, setEmail] = useState();
 
   const [subject, setSubject] = useState();
 
   const [message, setMessage] = useState();
+  const [name, setName] = useState();
 
-  const sendEmail = async () => {
+  const sendEmail = async (e) => {
 
-    // try {
-    //   const message = await client.sendAsync({
-    //     text: message,
-    //     from: email,
-    //     to: 'akshayvaghasiya3636@gmail.com',
-    //     subject: subject,
-    //   });
-    //   console.log(message);
-    // } catch (err) {
-    //   console.error(err);
-    // }
+    e.preventDefault();
+
+    const serviceId="service_anmmimp";
+    const templateId="template_7pbom6r";
+    const publicKey="riIfk0JbE1TEZU-PE";
+
+    const templeteParams = {
+      from_name : name,
+      from_email: email,
+      to_name : 'Bytebattels',
+      message : message
+    }
+
+    emailjs
+      .sendForm(
+        serviceId,
+        templateId,
+        form.current,
+        publicKey
+      )
+      .then(
+        (result) => {
+          e.target.reset();    
+        },
+        (error) =>{
+          alert("Oops, Something went wrong!!!");
+        }
+      );
 
   }
 
@@ -39,7 +52,14 @@ const Contact = () => {
       <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
         <h2 class="mb-4 text-4xl tracking-tight font-semibold text-center text-gray-900 dark:text-white">Contact Us</h2>
         <p class="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Got a technical issue? Want to send feedback about a beta feature? Need details about our Business plan? Let us know.</p>
-        <form action="/" class="space-y-8" onSubmit={sendEmail}>
+        <form action='/' class="space-y-8" onSubmit={sendEmail} ref={form}>
+        <div>
+            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your name</label>
+            <input type="text" id="name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Enter your email" required onChange={(e) => {
+              e.preventDefault();
+              setName(e.target.value);
+            }} />
+          </div>
           <div>
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your email</label>
             <input type="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Enter your email" required onChange={(e) => {
@@ -69,3 +89,4 @@ const Contact = () => {
 }
 
 export default Contact
+

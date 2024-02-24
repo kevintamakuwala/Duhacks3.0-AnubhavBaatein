@@ -4,7 +4,7 @@ import { JobCard } from "./JobCard";
 function ExperiencesList({experiences}) {
 
   const experiencesCards = experiences.map((experience, index) => {
-    return <JobCard key={index} job={experience} />;
+    return <JobCard key={index} jobobj={experience} />;
   });
 
   return (
