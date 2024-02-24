@@ -1,6 +1,8 @@
 package com.anubhavbaatein.backend.model;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Max;
 import jakarta.persistence.Entity;
@@ -39,6 +41,7 @@ public class Experience {
     @ManyToOne
     private Company company;
 
+    @JsonBackReference
     @ManyToOne
     private User user;
 
