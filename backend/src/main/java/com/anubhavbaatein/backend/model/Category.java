@@ -1,4 +1,5 @@
 package com.anubhavbaatein.backend.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.List;
@@ -21,6 +22,7 @@ public class Category {
     @NonNull
     private String title;
 
+    @JsonIgnore
     @ManyToMany
     private List<Experience> experiences = new ArrayList<>();
 }

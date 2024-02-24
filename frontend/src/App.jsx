@@ -13,6 +13,8 @@ import Navbar from "./custom_components/Navbar";
 import Footer from "./custom_components/Footer";
 import Home from "./Pages/Home";
 import PostExperience from "./Pages/PostExperience";
+import Alumni from "./Pages/Alumni";
+// import { auth } from "./config/firebase";
 import { auth } from "./config/firebase";
 import Contact from "./Pages/Contact";
 
@@ -50,6 +52,7 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/experiences" element={<Experiences/>} />
             <Route path="/postexperience" element={<PostExperience />} />
+            <Route path="/alumni" element={<Alumni/>}/>
             <Route path="/contact" element={<Contact />} />
           </Routes>
       </div>
