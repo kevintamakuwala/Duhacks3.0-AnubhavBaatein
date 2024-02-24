@@ -1,11 +1,13 @@
+import AlumniList from '@/custom_components/AlumniList';
 import { Custom_Pagination } from '@/custom_components/Custom_Pagination'
 import React, { useState } from 'react'
-const [page, setPage] = useState(1);
-const alumni = [{ name: "John Doe", email: "john@devui.com", role: "Frontend Developer", company: "Google", position: "Junior Developer" },
-{ name: "John Doe", email: "john@devui.com", role: "Frontend Developer", company: "Google", position: "Junior Developer" }]
 
 
 const Alumni = () => {
+
+    const alumni = [{ name: "John Doe", email: "john@devui.com", role: "Frontend Developer", company: "Google", position: "Junior Developer" },
+    { name: "John Doe", email: "john@devui.com", role: "Frontend Developer", company: "Google", position: "Junior Developer" }]
+
     return (
         <>
             <section class="mx-auto w-full max-w-7xl px-4 py-4">
@@ -94,52 +96,16 @@ const Alumni = () => {
                                                 </tr>)
                                         })}
                                     </tbody>
+
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="mt-5">
-                    <Custom_Pagination current_page={page} setPage={setPage} total_pages={(alumni?.length) / 12} />
+                    {/* <Custom_Pagination current_page={page} setPage={setPage} total_pages={(alumni?.length) / 12} /> */}
                 </div>
-                {/* <div class="flex items-center justify-center pt-6"> */}
-                {/* <a
-                        href="#"
-                        class="mx-1 cursor-not-allowed text-sm font-semibold text-gray-900"
-                    >
-                        <span class="hidden lg:block">← Previous</span>
-                        <span class="block lg:hidden">←</span>
-                    </a>
-                    <a
-                        href="#"
-                        class="mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
-                    >
-                        1
-                    </a>
-                    <a
-                        href="#"
-                        class="mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
-                    >
-                        2
-                    </a>
-                    <a
-                        href="#"
-                        class="mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
-                    >
-                        3
-                    </a>
-                    <a
-                        href="#"
-                        class="mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
-                    >
-                        4
-                    </a>
-                    <a href="#" class="mx-2 text-sm font-semibold text-gray-900">
-                        <span class="hidden lg:block">Next →</span>
-                        <span class="block lg:hidden">→</span>
-                    </a> */}
 
-                {/* </div> */}
             </section>
 
         </>
