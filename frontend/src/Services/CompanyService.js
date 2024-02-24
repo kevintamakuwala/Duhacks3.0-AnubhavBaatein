@@ -40,3 +40,13 @@ export const deleteCompany = async (id) => {
   });
   return response;
 };
+
+
+export const topCompanies = async () => {
+  const response = await Axios.get(`${url}/top-companies`,).then((res) => {
+    console.log(res.data);
+    return res.data;
+  });
+
+  return response;
+};
