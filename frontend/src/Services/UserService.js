@@ -42,3 +42,11 @@ export const deleteUser = async (id) => {
   });
   return response;
 };
+
+export const searchAlumni = async (keyword) => {
+  const response = await Axios.gte(`${url}/user/alumni`).then((res) => {
+    console.log(res.data);
+    return res.data;
+  });
+  return response;
+};
