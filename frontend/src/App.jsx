@@ -14,6 +14,7 @@ import Navbar from "./custom_components/Navbar";
 import Footer from "./custom_components/Footer";
 import Home from "./Pages/Home";
 import PostExperience from "./Pages/PostExperience";
+import Alumni from "./Pages/Alumni";
 // import { auth } from "./config/firebase";
 
 export const AppContext = createContext();
@@ -50,6 +51,7 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/experiences" element={<Experiences/>} />
             <Route path="/postexperience" element={<PostExperience />} />
+            <Route path="/alumni" element={<Alumni/>}/>
           </Routes>
       </div>
         <Footer />
