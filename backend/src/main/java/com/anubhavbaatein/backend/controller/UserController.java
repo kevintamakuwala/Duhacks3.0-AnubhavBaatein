@@ -46,12 +46,12 @@ public class UserController {
         System.out.println(data.getId());
         User user = new User();
         user.setId(data.getId());
-        user.setCurrentCompany(data.getCurrentCompanyName());
+        user.setCurrentCompany(data.getCurrentCompany());
         user.setEmail(data.getEmail());
         user.setGithub(data.getGithub());
         user.setLinkedin(data.getLinkedin());
-        user.setName(data.getUserName());
-        user.setPhone(data.getPhoneNumber());
+        user.setName(data.getName());
+        user.setPhone(data.getPhone());
 
         List<String> experienceIds = data.getExperiencesId();
 
@@ -72,12 +72,12 @@ public class UserController {
     @PutMapping("/user/{id}")
     public User updateUser(@PathVariable("id") String id, @RequestBody UserReq data) {
         User user = userService.getUserById(id);
-        user.setCurrentCompany(data.getCurrentCompanyName());
+        user.setCurrentCompany(data.getCurrentCompany());
         user.setEmail(data.getEmail());
         user.setGithub(data.getGithub());
         user.setLinkedin(data.getLinkedin());
-        user.setName(data.getUserName());
-        user.setPhone(data.getPhoneNumber());
+        user.setName(data.getName());
+        user.setPhone(data.getPhone());
 
         List<String> experienceIds = data.getExperiencesId();
 

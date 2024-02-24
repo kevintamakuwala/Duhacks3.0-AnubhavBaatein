@@ -68,7 +68,7 @@ public class CategoryController {
 
             String uniqueId = UUID.randomUUID().toString();
             newCategory.setId(uniqueId);
-            newCategory.setTitle(data.getCategoryTitle());
+            newCategory.setTitle(data.getTitle());
 
             List<String> experiences = data.getExperiences();
 
@@ -88,7 +88,7 @@ public class CategoryController {
         try {
             Category category = categoryService.getCategoriesById(id);
 
-            category.setTitle(data.getCategoryTitle());
+            category.setTitle(data.getTitle());
             
             List<String> experiences = data.getExperiences();
 
