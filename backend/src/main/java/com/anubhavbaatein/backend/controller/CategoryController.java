@@ -77,12 +77,6 @@ public class CategoryController {
             newCategory.setId(uniqueId);
             newCategory.setTitle(data.getTitle());
 
-            List<String> experiences = data.getExperiences();
-
-            for (String experienceId : experiences) {
-                newCategory.getExperiences().add(experienceService.getExperienceById(experienceId));
-            }
-
             categoryService.addCategory(newCategory);
             return new ResponseEntity<>(newCategory, HttpStatus.OK);
         } catch (Exception e) {
@@ -97,12 +91,6 @@ public class CategoryController {
             Category category = categoryService.getCategoriesById(id);
             if (category != null) {
                 category.setTitle(data.getTitle());
-
-                List<String> experiences = data.getExperiences();
-
-                for (String experienceId : experiences) {
-                    category.getExperiences().add(experienceService.getExperienceById(experienceId));
-                }
 
                 categoryService.updateCategoryById(category, id);
                 return new ResponseEntity<>(category, HttpStatus.OK);

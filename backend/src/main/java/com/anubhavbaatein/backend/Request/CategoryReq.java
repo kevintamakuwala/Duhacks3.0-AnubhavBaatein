@@ -13,7 +13,5 @@ import lombok.Setter;
 public class CategoryReq {
 
     private String title;
-
-    private List<String> experiences = new ArrayList<>();
     
 }
