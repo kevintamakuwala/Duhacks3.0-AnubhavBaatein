@@ -1,8 +1,6 @@
 package com.anubhavbaatein.backend.service;
-
 import com.anubhavbaatein.backend.model.User;
-import org.springframework.data.domain.Page;
-
+import java.util.Map;
 import java.util.List;
 
 public interface UserService {
@@ -25,4 +23,6 @@ public interface UserService {
     public List<User> searchAlumni(String keyword);
 
     public List<User> getAlumniWithPagination(int pageNo);
+
+    public Map<String, String> getAnalytics();
 }

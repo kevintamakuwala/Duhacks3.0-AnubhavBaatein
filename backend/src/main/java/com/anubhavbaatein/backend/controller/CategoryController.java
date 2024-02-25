@@ -1,6 +1,7 @@
 package com.anubhavbaatein.backend.controller;
 
 import com.anubhavbaatein.backend.Request.CategoryReq;
+import com.anubhavbaatein.backend.Response.TopCategory;
 import com.anubhavbaatein.backend.model.Category;
 import com.anubhavbaatein.backend.model.Company;
 import com.anubhavbaatein.backend.service.CategoryService;
@@ -118,7 +119,7 @@ public class CategoryController {
     }
 
     @GetMapping("/top-categories")
-    public ResponseEntity<List<Category>> getTopCategories() {
+    public ResponseEntity<List<TopCategory>> getTopCategories() {
         return ResponseEntity.ok(categoryService.getTopCategories());
     }
 
