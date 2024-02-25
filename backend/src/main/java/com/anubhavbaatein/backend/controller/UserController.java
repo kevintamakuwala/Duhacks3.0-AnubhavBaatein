@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*", allowCredentials = "true")
+@CrossOrigin(origins = "https://anubhav-baatein.vercel.app/" , allowedHeaders = "*", allowCredentials = "true")
 public class UserController {
 
     @Autowired
