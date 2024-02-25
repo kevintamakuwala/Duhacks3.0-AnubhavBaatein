@@ -32,7 +32,7 @@ export function UserProfile() {
 
   useEffect(() => {
     getData();
-  }, [refresh]);
+  }, [refresh, uid]);
 
   let userDetails = [];
   // iterate through user properties and display them

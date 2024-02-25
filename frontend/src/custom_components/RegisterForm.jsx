@@ -9,7 +9,7 @@ import { AppContext } from "@/App";
 import { createUser } from "@/Services/UserService";
 
 export function RegisterForm() {
-  const { isLoggedIn, setIsLoggedIn, user, setUser } = React.useContext(AppContext);
+  const { isLoggedIn, setIsLoggedIn, setRefresh  } = React.useContext(AppContext);
 
   const navigate = useNavigate();
 
@@ -48,6 +48,7 @@ export function RegisterForm() {
         console.log(response);
         localStorage.setItem("user", JSON.stringify(response));
         setIsLoggedIn(true);
+        setRefresh((val) => !val);
         navigate("/");
       });
   }
@@ -84,6 +85,15 @@ export function RegisterForm() {
   async function signInWithGoogle() {
     try {
       const response = await signInWithPopup(auth, googleProvider).then((response) => {
+
+        // if user has selected email id which does not contain @ddu.ac.in then remove the user from firebase
+        if (!response.user.email.includes("@ddu.ac.in")) {
+          response.user.delete().then(() => {
+            alert("Please enter valid email address contains @ddu.ac.in and first two characters are number.");
+          });
+          return;
+        }
+
         return response;
       });
 

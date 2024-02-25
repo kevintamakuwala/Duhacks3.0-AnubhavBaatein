@@ -51,7 +51,6 @@ export function Login() {
       await signInWithPopup(auth, googleProvider).then((response) => {
         localStorage.setItem("user", JSON.stringify(response.user));
         setIsLoggedIn(true);
-        setUser(response.user);
         navigate("/");
       });
     } catch (error) {
