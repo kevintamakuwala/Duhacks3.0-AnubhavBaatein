@@ -1,136 +1,242 @@
-import React from 'react'
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import React from "react";
+import { Input } from "@/components/ui/input";
 import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { createExperience } from "@/Services/ExperienceService";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Textarea } from "@/components/ui/textarea";
 
+const experienceFormSchema = z.object({
+  title: z.string(),
+  ctc: z.number().positive().int(),
+  type: z.string(),
+  location: z.string(),
+  company: z.string(),
+  industry: z.string(),
+  description: z.string(),
+  difficulty: z.string(),
+  month: z.string(),
+  rounds: z.number().positive().int(),
+});
 
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 const PostExperience = () => {
+  const form = useForm({
+    resolver: zodResolver(experienceFormSchema),
+    defaultValues: {
+      title: "",
+      ctc: "",
+      type: "",
+      location: "",
+      company: "",
+      industry: "",
+      description: "",
+      difficulty: "",
+      month: "",
+      rounds: "",
+    },
+  });
 
+  async function onSubmit(data) {
+    if (data) {
+      const response = await createExperience(data).then((response) => {
+        console.log(response);
+        setUser(response);
+        form.reset();
+      });
+    }
+  }
 
-    const months = [
-        "January", "February", "March", "April",
-        "May", "June", "July", "August",
-        "September", "October", "November", "December"
-    ];
+  // create form fields according to schema
 
+  const fields = Object.keys(experienceFormSchema.shape).map((key) => {
+    let title = key.charAt(0).toUpperCase() + key.slice(1);
+    let placeholder = "Enter " + key + " here...";
+
+    // for selecting job type and difficulty level we use Select component
+    if (key === "type") {
+      return (
+        <FormField
+          control={form.control}
+              name={key}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{title}</FormLabel>
+              <FormControl>
+                <Select id={key}>
+                  <SelectTrigger>
+                    <SelectValue placeholder={"Select " + title} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="internship">Internship</SelectItem>
+                      <SelectItem value="full time">Full time</SelectItem>
+                      <SelectItem value="trainee">Trainee</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      );
+    } else if (key === "difficulty") {
+      return (
+        <FormField
+          control={form.control}
+              name={key}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{title}</FormLabel>
+              <FormControl>
+                <Select id={key}>
+                  <SelectTrigger>
+                    <SelectValue placeholder={"Select " + title} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="easy">Easy</SelectItem>
+                      <SelectItem value="medium">Meadium</SelectItem>
+                      <SelectItem value="hard">Hard</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      );
+    } else if (key === "month") {
+      return (
+        <FormField
+          control={form.control}
+          name={key}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{title}</FormLabel>
+              <FormControl>
+                <Select id={key}>
+                  <SelectTrigger>
+                    <SelectValue placeholder={"Select " + title} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {months.map((ele, index) => {
+                        return (
+                          <SelectItem key={index} value={index + 1}>
+                            {ele}
+                          </SelectItem>
+                        );
+                      })}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      );
+    }
+    else if (key === "description") {
+        return (
+            <FormField
+            control={form.control}
+                name={key}
+                className="col-span-2"
+            render={({ field }) => (
+                <FormItem>
+                <FormLabel>{title}</FormLabel>
+                <FormControl>
+                    <Textarea placeholder={placeholder} {...field} />
+                </FormControl>
+                <FormMessage />
+                </FormItem>
+            )}
+            />
+        );
+      }
+    
+      // make all form fields in two columns 
 
     return (
-        <>
+      <FormField
+        control={form.control}
+            name={key}
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>{title}</FormLabel>
+            <FormControl>
+              <Input placeholder={placeholder} {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+    );
+  });
 
-            <div className='w-full'>
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+              <Card className="">
+                <CardHeader>
+                  <CardTitle>Post Experience</CardTitle>
+                  <CardDescription>
+                    Share your interview experience with the community
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Form {...form}>
+                      <form onSubmit={form.handleSubmit(onSubmit)}>
+                          {/* make all form fields in two column */}
+                      <div className="grid w-full items-center gap-4 grid-cols-4">
+                        {fields}
+                      </div>
+                      <Button type="submit" className="mt-4">
+                        Post Experience
+                      </Button>
+                    </form>
+                  </Form>
+                </CardContent>
+              </Card>
+      </div>
+  );
+};
 
-            <h1 className="text-5xl font-semibold text-center mt-8 text-gray-800">Post Experiences</h1>
-            <div className='w-[90%] sm:w-[65%] m-auto my-8 p-5 '>
-
-                <div className="grid w-full items-center gap-2">
-                    <Label htmlFor="jobtitle">Job Title</Label>
-                    <Input type="text" id="jobtitle" placeholder="Enter Job Title" />
-                </div>
-
-                <div className='flex flex-col sm:flex-row  sm:mt-4 mt-5'>
-
-                    <div className="grid w-full items-center gap-3 mr-5">
-                        <Label htmlFor="ctcpackage">CTC package</Label>
-                        <Input type="text" id="ctcpackage" placeholder="Enter Compensation Package(In LPA)" />
-                    </div>
-                    <div className="grid items-center gap-3 sm:mt-0 mt-5">
-                        <Label htmlFor="jobtype">Job Type</Label>
-                        <Select id="jobtype">
-                            <SelectTrigger className="w-[15rem]">
-                                <SelectValue placeholder="Select a Job Type" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectGroup>
-                                    <SelectItem value="internship">Internship</SelectItem>
-                                    <SelectItem value="full time">Full time</SelectItem>
-                                    <SelectItem value="trainee">Trainee</SelectItem>
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select>
-                    </div>
-
-                </div>
-                <div className="grid w-full items-center gap-3 mt-5">
-                    <Label htmlFor="location">Location</Label>
-                    <Input type="text" id="location" placeholder="Enter Job Location" />
-                </div>
-
-                <div className="grid w-full items-center gap-3 mt-5">
-                    <Label htmlFor="company">Company Name</Label>
-                    <Input type="text" id="company" placeholder="Enter Company Name" />
-                </div>
-
-                <div className="grid w-full items-center gap-3 mt-5">
-                    <Label htmlFor="industry">Industry</Label>
-                    <Input type="text" id="industry" placeholder="Enter industry to which the job belongs (Engineering, Marketing, Sales)" />
-                </div>
-
-                <div className="grid max-w-2xl items-center gap-3 mt-5">
-                    <Label htmlFor="description">Description</Label>
-                    <Textarea id="description" placeholder="Type a detailed description of the interview/experience..." />
-                </div>
-
-                <div className='grid grid-rows-1 md:grid-cols-3 w-full'>
-
-                    <div className="grid md:w-full items-center gap-3 mt-5">
-                        <Label htmlFor="difficulty">Difficulty Level</Label>
-                        <Select id="difficulty">
-                            <SelectTrigger >
-                                <SelectValue placeholder="Select Difficulty Level" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectGroup>
-                                    <SelectItem value="easy">Easy</SelectItem>
-                                    <SelectItem value="medium">Meadium</SelectItem>
-                                    <SelectItem value="hard">Hard</SelectItem>
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select>
-                    </div>
-
-
-                    <div className="grid md:w-full items-center gap-3 mt-5 md:pl-3">
-                        <Label htmlFor="interviewmonth">Interview Month</Label>
-                        <Select id="interviewmonth">
-                            <SelectTrigger>
-                                <SelectValue placeholder="Select Interview Month" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectGroup>
-                                    {
-                                        months.map((ele, index) => {
-                                            return <SelectItem key={index} value={ele} >{ele}</SelectItem>
-                                        })
-                                    }
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select>
-                    </div>
-
-                    <div className="grid md:w-full items-center gap-3 mt-5 md:pl-3">
-                        <Label htmlFor="rounds">No. of Rounds</Label>
-                        <Input type="number" id="rounds" placeholder="Enter No. of Interview Rounds" />
-                    </div>
-                </div>
-
-                <div className='w-full flex justify-end mt-6'>
-                    <Button className="w-40" type="button">Add Post</Button>
-                </div>
-            </div>
-            </div>
-        </>
-    )
-}
-
-export default PostExperience
+export default PostExperience;

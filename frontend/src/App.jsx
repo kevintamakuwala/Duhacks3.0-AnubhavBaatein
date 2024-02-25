@@ -14,9 +14,9 @@ import Footer from "./custom_components/Footer";
 import Home from "./Pages/Home";
 import PostExperience from "./Pages/PostExperience";
 import Alumni from "./Pages/Alumni";
-// import { auth } from "./config/firebase";
 import { auth } from "./config/firebase";
 import Contact from "./Pages/Contact";
+import AddJob from "./Pages/AddJob";
 
 export const AppContext = createContext();
 
@@ -55,7 +55,8 @@ export default function App() {
             <Route path="/experiences" element={<Experiences/>} />
             <Route path="/post-experience" element={isLoggedIn ? <PostExperience /> : <Login/>} />
             <Route path="/alumni" element={<Alumni/>}/>
-            <Route path="/contact" element={isLoggedIn ? <Contact /> : <Login/>} />
+            <Route path="/contact" element={isLoggedIn ? <Contact /> : <Login />} />
+            <Route path="/add-job" element={<AddJob />} />
           </Routes>
       </div>
         {isLoggedIn && location !== '/register' && location !== '/login' &&  <Footer />}
