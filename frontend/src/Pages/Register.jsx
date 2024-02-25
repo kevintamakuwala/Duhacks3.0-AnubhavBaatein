@@ -38,18 +38,15 @@ export default function Register() {
             >
               <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
             </svg>
-            Stark Industries
+            AnubhavBaatein
           </div>
           <div className="relative z-20 mt-auto">
             <blockquote className="space-y-2">
               <p className="text-lg">
-                &ldquo;This invoice generator has been a lifesaver, helping me
-                create invoices quickly and impress my clients with professional
-                designs. It's saved me heaps of time and made my workflow much
-                smoother.&rdquo;
+                &ldquo;Welcome to AnubhavBaatein, your go-to platform for invaluable placement insights! Here, esteemed alumni from our college generously share their interview experiences, offering a treasure trove of firsthand knowledge to guide and inspire current students. By accessing these anecdotes, students gain invaluable insights into interview processes, helping them prepare effectively and confidently. Join our community today and leverage the wisdom of those who have successfully navigated the interview landscape.&rdquo;
               </p>
 
-              <footer className="text-sm">- Tony Stark</footer>
+              <footer className="text-sm">-Team ByteBattles</footer>
             </blockquote>
           </div>
         </div>
