@@ -4,9 +4,7 @@ import Search from "@/custom_components/Search";
 import Static_Card from "@/custom_components/Static_Card";
 import Testimonial from "@/custom_components/Testimonial";
 import PopularCompanies from "@/custom_components/PopularCompanies";
-import TopExperience from "@/custom_components/TopExperience";
 import PopularCategory from "@/custom_components/PopularCategory";
-import { CarouselList } from "@/custom_components/CarouselList";
 
 function Home() {
 
@@ -30,6 +28,7 @@ function Home() {
                     <img className="  mt-4 lg:w-[50%] sm:w-[44%] lg:mb-16" src={vector} alt="SVG Image" />
                 </div>
             </div>
+            <Static_Card />
             <div class="p-4 text-base leading-7 text-gray-600 w-10/12 md:h-auto md:flex-row items-center justify-between py-9">
                 <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-3xl">Popular Companies</h2>
                 <PopularCompanies />
