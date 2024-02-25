@@ -43,7 +43,7 @@ export function ProfileForm() {
 
   async function onSubmit(data) {
 
-    data.id = "124";
+    data.id = JSON.parse(localStorage.getItem("user")).uid;
 
     console.log(data);
     if (data) {
@@ -56,12 +56,12 @@ export function ProfileForm() {
     }
   }
 
-  // const uid = JSON.parse(localStorage.getItem("user")).uid;
-  // console.log(uid);
+  const uid = JSON.parse(localStorage.getItem("user")).uid;
+  console.log(uid);
   const [user, setUser] = useState();
 
   const getData = async () => {
-    await getUserById("124").then((response) => {
+    await getUserById(uid).then((response) => {
       console.log(response);
       setUser(response);
       form.setValue("name", response.name);

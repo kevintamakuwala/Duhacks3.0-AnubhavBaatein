@@ -16,12 +16,12 @@ export function UserProfile() {
 
   const {refresh} = useContext(AppContext); 
 
-  // const uid = JSON.parse(localStorage.getItem("user")).uid;
-  // console.log(uid);
+  const uid = JSON.parse(localStorage.getItem("user")).uid;
+  console.log(uid);
   const [user, setUser] = useState();
 
   const getData = async () => {
-    await getUserById("124").then((response) => {
+    await getUserById(uid).then((response) => {
       console.log(response);
       setUser(response);
     });

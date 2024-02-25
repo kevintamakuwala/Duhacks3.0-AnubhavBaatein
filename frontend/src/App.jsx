@@ -22,13 +22,11 @@ export const AppContext = createContext();
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState();
   const [refresh , setRefresh] = useState(false);
-  console.log(auth?.currentUser);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user);
+      localStorage.setItem("user", JSON.stringify(user));
       if (user) {
         setIsLoggedIn(true);
       } else {
@@ -44,20 +42,20 @@ export default function App() {
   const location = window.location.pathname;
 
   return (
-    <AppContext.Provider value={{ isLoggedIn, setIsLoggedIn , user , setUser , refresh , setRefresh }}>
+    <AppContext.Provider value={{ isLoggedIn, setIsLoggedIn , refresh , setRefresh }}>
         <Router>
           {isLoggedIn && location !== '/register' && location !== '/login' &&  <Navbar />}
       <div className="flex justify-center items-center h-full">
           <Routes>
-            <Route path="/" element={isLoggedIn ? <Home/> : <Login/>}/>
-            <Route path="/settings" element={isLoggedIn ? <Settings/> : <Login/>} />
+            <Route path="/" element={isLoggedIn ? <Home/> : <Register/>}/>
+            <Route path="/settings" element={isLoggedIn ? <Settings/> : <Register/>} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/experiences" element={<Experiences/>} />
-            <Route path="/post-experience" element={isLoggedIn ? <PostExperience /> : <Login/>} />
-            <Route path="/alumni" element={<Alumni/>}/>
+            <Route path="/experiences" element={isLoggedIn ? <Experiences/> : <Register/>} />
+            <Route path="/post-experience" element={isLoggedIn ? <PostExperience /> : <Register/>} />
+            <Route path="/alumni" element={isLoggedIn ? <Alumni/> : <Register/>}/>
             <Route path="/contact" element={isLoggedIn ? <Contact /> : <Login />} />
-            <Route path="/add-job" element={<AddJob />} />
+            <Route path="/add-job" element={isLoggedIn ? <AddJob /> : <Register/>} />
           </Routes>
       </div>
         {isLoggedIn && location !== '/register' && location !== '/login' &&  <Footer />}
