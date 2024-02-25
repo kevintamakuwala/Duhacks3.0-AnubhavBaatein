@@ -1,1 +1,0 @@
-export const url = 'https://duhacks.onrender.com/api';

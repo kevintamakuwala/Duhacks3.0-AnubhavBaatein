@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { url } from ".";
+const url=import.meta.env.VITE_REACT_APP_BASE_URL;
 
 export const getExperiences = async () => {
   const response = await Axios.get(`${url}/experience`).then((res) => {

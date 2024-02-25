@@ -1,5 +1,5 @@
-import { url } from ".";
 import Axios from "axios";
+const url=import.meta.env.VITE_REACT_APP_BASE_URL;
 
 export const getJobs = async () => {
     const response = await Axios.get(`${url}/job`).then((res) => {

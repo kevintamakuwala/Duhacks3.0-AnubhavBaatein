@@ -1,6 +1,6 @@
-import { url } from ".";
-import Axios from "axios";
 
+import Axios from "axios";
+const url=import.meta.env.VITE_REACT_APP_BASE_URL;
 export const getCategories = async () => {
   const response = await Axios.get(`${url}/category`).then((res) => {
     return res.data;
