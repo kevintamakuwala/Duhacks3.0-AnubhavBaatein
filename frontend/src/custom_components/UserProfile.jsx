@@ -8,10 +8,14 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getUserById } from "@/Services/UserService";
+import { AppContext } from "@/App";
 
 export function UserProfile() {
+
+  const {refresh} = useContext(AppContext); 
+
   // const uid = JSON.parse(localStorage.getItem("user")).uid;
   // console.log(uid);
   const [user, setUser] = useState();
@@ -25,17 +29,19 @@ export function UserProfile() {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [refresh]);
 
   let userDetails = [];
   // iterate through user properties and display them
   if (user) {
-    userDetails = Object.keys(user).map((key, index) => {
+    userDetails = Object?.keys(user)?.map((key, index) => {
       // first key is the id, so we skip it
-      if (key === "id") return null;
+      if (key === "id" || key === "experiences") return null;
 
       // display_key is the key with the first letter capitalized
       let display_key = key.charAt(0).toUpperCase() + key.slice(1);
+
+      if(user[key] === null) return null;
 
       return (
         <div key={index}>

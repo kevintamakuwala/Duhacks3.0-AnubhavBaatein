@@ -23,6 +23,7 @@ export const AppContext = createContext();
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState();
+  const [refresh , setRefresh] = useState(false);
   console.log(auth?.currentUser);
 
   useEffect(() => {
@@ -43,7 +44,7 @@ export default function App() {
   const location = window.location.pathname;
 
   return (
-    <AppContext.Provider value={{ isLoggedIn, setIsLoggedIn , user , setUser }}>
+    <AppContext.Provider value={{ isLoggedIn, setIsLoggedIn , user , setUser , refresh , setRefresh }}>
         <Router>
           {isLoggedIn && location !== '/register' && location !== '/login' &&  <Navbar />}
       <div className="flex justify-center items-center h-full">

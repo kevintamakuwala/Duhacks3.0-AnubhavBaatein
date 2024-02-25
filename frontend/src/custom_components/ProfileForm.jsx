@@ -13,7 +13,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { getUserById, updateUser } from "@/Services/UserService";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "@/App";
 
 const profileFormSchema = z.object({
   name: z.string(),
@@ -25,6 +26,9 @@ const profileFormSchema = z.object({
 });
 
 export function ProfileForm() {
+
+  const { refresh , setRefresh } = useContext(AppContext);
+
   const form = useForm({
     resolver: zodResolver(profileFormSchema),
     defaultValues: {
@@ -38,10 +42,15 @@ export function ProfileForm() {
   });
 
   async function onSubmit(data) {
+
+    data.id = "124";
+
+    console.log(data);
     if (data) {
       const response = await updateUser(data).then((response) => {
         console.log("Response");
         setUser(response);
+        setRefresh((val) => !val);
         form.reset();
       });
     }
