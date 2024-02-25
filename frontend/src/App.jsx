@@ -52,6 +52,7 @@ export default function App() {
             <Route path="/settings" element={isLoggedIn ? <Settings/> : <Register/>} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/experience/:id" element={isLoggedIn ? <Experiences/> : <Register/>} />
             <Route path="/experiences" element={isLoggedIn ? <Experiences/> : <Register/>} />
             <Route path="/post-experience" element={isLoggedIn ? <PostExperience /> : <Register/>} />
             <Route path="/alumni" element={isLoggedIn ? <Alumni/> : <Register/>}/>
