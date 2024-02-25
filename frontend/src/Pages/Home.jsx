@@ -24,7 +24,7 @@ function Home() {
                             <p className="mb-5 mx-3">
                                 Find the alumni working at your dream Companies ,dive into their experiences ,connect with them and much more
                             </p>
-                            <Search />
+                            {/* <Search /> */}
                         </div>
                     </div>
                     <img className="  mt-4 lg:w-[50%] sm:w-[44%] lg:mb-16" src={vector} alt="SVG Image" />

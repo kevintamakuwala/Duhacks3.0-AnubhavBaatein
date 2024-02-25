@@ -135,7 +135,7 @@ export function ProfileForm() {
             <FormItem>
               <FormLabel>Current Company</FormLabel>
               <FormControl>
-                <Input placeholder="Bajrang Dal" {...field} />
+                <Input placeholder="Microsoft" {...field} />
               </FormControl>
               <FormDescription>
                 Please select your valid company name to display.
