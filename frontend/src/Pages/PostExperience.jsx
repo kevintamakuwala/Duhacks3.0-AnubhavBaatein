@@ -27,6 +27,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Textarea } from "@/components/ui/textarea";
 import { createCompany } from "@/Services/CompanyService";
 import { createJob } from "@/Services/JobService";
+import { createCategory } from "@/Services/CategoryService";
 
 const experienceFormSchema = z.object({
   title: z.string(),
@@ -60,8 +61,7 @@ const months = [
 
 const PostExperience = () => {
 
-  // const {id} = localStorage.getItem("id");
-  const id = "124";
+  const id = JSON.parse(localStorage.getItem("user")).uid;
 
   const form = useForm({
     resolver: zodResolver(experienceFormSchema),
@@ -97,7 +97,7 @@ const PostExperience = () => {
       const res = await createCompany({name : data?.company}).then((res)=>{
         console.log("Company Creation : ");
         console.log(res);
-        return res.data;
+        return res;
       });
 
       data.companyId = res;
@@ -114,13 +114,30 @@ const PostExperience = () => {
       const job = await createJob(jobData).then((res) => {
         console.log("Job Creation");
         console.log(res);
-        return res.data;
+        return res;
       })
 
-      data.jobId = job;
+      data.jobId = job.id;
 
       data.userId = id;
 
+      for (let i = 0; i < data.categories.length; i++){
+        const categoryData = {
+          title: data.categories[i]
+        }
+        const category = await createCategory(categoryData).then((res) => {
+          console.log("Category Creation");
+          console.log(res);
+          return res;
+        })
+        data.categories[i] = category.title;
+      }
+      data.difficultyLevel = data.difficulty;
+
+      // remove difficulty from data
+      delete data.difficulty;
+
+      console.log("Experience Data");
       console.log(data);
 
       const response = await createExperience(data).then((response) => {
@@ -147,7 +164,10 @@ const PostExperience = () => {
             <FormItem>
               <FormLabel>{title}</FormLabel>
               <FormControl>
-                <Select id={key}>
+                <Select id={key}
+                onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder={"Select " + title} />
                   </SelectTrigger>
@@ -174,14 +194,17 @@ const PostExperience = () => {
             <FormItem>
               <FormLabel>{title}</FormLabel>
               <FormControl>
-                <Select id={key}>
+                <Select id={key}
+                onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder={"Select " + title} />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
                       <SelectItem value="easy">Easy</SelectItem>
-                      <SelectItem value="medium">Meadium</SelectItem>
+                      <SelectItem value="medium">Medium</SelectItem>
                       <SelectItem value="hard">Hard</SelectItem>
                     </SelectGroup>
                   </SelectContent>
@@ -201,7 +224,10 @@ const PostExperience = () => {
             <FormItem>
               <FormLabel>{title}</FormLabel>
               <FormControl>
-                <Select id={key}>
+                <Select id={key}
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder={"Select " + title} />
                   </SelectTrigger>

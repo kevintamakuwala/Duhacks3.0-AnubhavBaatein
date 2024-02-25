@@ -23,9 +23,10 @@ const Navbar = () => {
       <div className="flex justify-between items-center border-b h-16 w-full">
         <SubNav />
         <div className="sm:mr-6 flex items-center">
-          {isLoggedIn ? <UserProfile /> :<Button className="bg-blue-500 hover:bg-blue-600 hidden sm:block" onClick={()=>{
+          <UserProfile />
+          <Button className="bg-blue-500 hover:bg-blue-600 hidden sm:block" onClick={()=>{
               navigate("/post-experience")
-            }}>Share Experince</Button>}
+            }}>Share Experince</Button>
           </div>
       </div>
 

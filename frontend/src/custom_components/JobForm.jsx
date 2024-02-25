@@ -16,7 +16,7 @@ import { createJob } from "@/Services/JobService";
 
 const jobFormSchema = z.object({
   title: z.string(),
-  ctc: z.number(),
+  ctc: z.string(),
   type: z.string(),
   location: z.string(),
   industry: z.string(),

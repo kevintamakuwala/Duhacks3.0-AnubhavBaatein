@@ -64,6 +64,7 @@ public class JobController {
 
     @PostMapping("/job")
     public ResponseEntity<Job> addJob(@RequestBody JobReq data) {
+        System.out.println(data.getCompanyId());
         try {
             Job newJob = new Job();
             newJob.setId(UUID.randomUUID().toString());
