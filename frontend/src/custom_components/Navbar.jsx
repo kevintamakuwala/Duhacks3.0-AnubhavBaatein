@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { UserProfile } from "./UserProfile";
 import { MainNav } from "./MainNav";
 import SubNav from "./SubNav";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-
-
+import { AppContext } from "@/App";
 
 const Navbar = () => {
+
+  const { isLoggedIn } = useContext(AppContext);
 
   const navigate = useNavigate();
 
@@ -22,10 +23,9 @@ const Navbar = () => {
       <div className="flex justify-between items-center border-b h-16 w-full">
         <SubNav />
         <div className="sm:mr-6 flex items-center">
-            <UserProfile />
-            <Button className="bg-blue-500 hover:bg-blue-600 hidden sm:block" onClick={()=>{
+          {isLoggedIn ? <UserProfile /> :<Button className="bg-blue-500 hover:bg-blue-600 hidden sm:block" onClick={()=>{
               navigate("/post-experience")
-            }}>Share Experince</Button>
+            }}>Share Experince</Button>}
           </div>
       </div>
 

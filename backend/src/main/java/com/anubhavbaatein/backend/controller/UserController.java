@@ -80,12 +80,6 @@ public class UserController {
             user.setName(data.getName());
             user.setPhone(data.getPhone());
             user.setRole(data.getRole());
-            List<String> experienceIds = data.getExperiencesId();
-
-            for (String experienceId : experienceIds) {
-                Experience experience = experienceService.getExperienceById(experienceId);
-                user.getExperiences().add(experience);
-            }
 
             userService.addUser(user);
             return new ResponseEntity<>(user, HttpStatus.OK);
@@ -107,12 +101,6 @@ public class UserController {
                 user.setName(data.getName());
                 user.setPhone(data.getPhone());
                 user.setRole(data.getRole());
-                List<String> experienceIds = data.getExperiencesId();
-
-                for (String experienceId : experienceIds) {
-                    Experience experience = experienceService.getExperienceById(experienceId);
-                    user.getExperiences().add(experience);
-                }
 
                 userService.updateUserById(user, id);
                 return new ResponseEntity<>(user, HttpStatus.OK);

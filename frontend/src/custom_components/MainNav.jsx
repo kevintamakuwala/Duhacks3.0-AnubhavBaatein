@@ -29,6 +29,7 @@ export function MainNav() {
       title: "Contact",
       href: "/contact",
     },
+    
   ];
   return (
     <NavigationMenu>

@@ -27,6 +27,4 @@ public class UserReq {
     private String github;
 
     private String role;
-
-    private List<String> experiencesId = new ArrayList<>();
 }
