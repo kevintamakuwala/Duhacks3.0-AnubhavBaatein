@@ -182,9 +182,9 @@ public class ExperienceController {
         }
     }
 
-        @GetMapping("/experienceWithPagination/{pageNo}")
+    @GetMapping("/experienceWithPagination/{pageNo}")
     public ResponseEntity<?>getExperienceWithPagination(@PathVariable("pageNo")String pageNo){
             int pageN = Integer.parseInt(pageNo);
-            return ResponseEntity.ok(experienceService.getAlumniWithPagination(pageN));
+            return ResponseEntity.ok(experienceService.getExperienceWithPagination(pageN));
     }
 }
