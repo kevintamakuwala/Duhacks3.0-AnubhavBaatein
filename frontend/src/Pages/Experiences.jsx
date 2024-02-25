@@ -1,15 +1,54 @@
 // Experiences.js
 
 import { getExperiencesWithPagination, getExperiences } from '@/Services/ExperienceService';
+import { getUserById } from '@/Services/UserService';
 import { Custom_Pagination } from '@/custom_components/Custom_Pagination';
 import ExperiencesList from '@/custom_components/ExperiencesList';
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 function Experiences() {
+  
   const [page, setPage] = useState(1);
   const [experiences, setExperiences] = useState([]);
   const [totalExperiences, setTotalExperiences] = useState(0);
   const experiencesPerPage = 12; 
+  const userid = useParams();
+
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getUserById(userid.id);
+        setExperiences(data.experiences);
+      } catch (error) {
+        console.error('Error fetching experiences:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+  if(Object.keys(userid).length)
+  {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-5xl font-semibold mb-8 text-center text-gray-800">Interview Experiences</h1>
+        <div className="gap-6">
+          <div>
+            <ExperiencesList experiences={experiences} setExperiences={setExperiences} />
+          </div>
+          <div className="mt-5">
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+
+
+
 
   useEffect(() => {
     const fetchData = async () => {

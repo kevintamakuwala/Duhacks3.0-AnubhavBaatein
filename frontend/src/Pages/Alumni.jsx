@@ -3,23 +3,9 @@ import AlumniList from "@/custom_components/AlumniList";
 import { Custom_Pagination } from "@/custom_components/Custom_Pagination";
 import React, { useState, useEffect } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Link } from "react-router-dom";
+
 const Alumni = () => {
-  //   const alumni = [
-  //     {
-  //       name: "John Doe",
-  //       email: "john@devui.com",
-  //       role: "Frontend Developer",
-  //       company: "Google",
-  //       position: "Junior Developer",
-  //     },
-  //     {
-  //       name: "John Doe",
-  //       email: "john@devui.com",
-  //       role: "Frontend Developer",
-  //       company: "Google",
-  //       position: "Junior Developer",
-  //     },
-  //   ];
   const [page, setPage] = useState(1);
   const [alumni, setAlumni] = useState([]);
   const [totalAlumni, setTotalAlumni] = useState(0);
@@ -86,12 +72,6 @@ const Alumni = () => {
                       >
                         Email
                       </th>
-                      {/* <th
-                        scope="col"
-                        class="px-4 py-3.5 text-left text-sm font-normal text-gray-700"
-                      >
-                        Role
-                      </th> */}
                       <th scope="col" class="relative px-4 py-3.5">
                         <span class="sr-only">Edit</span>
                       </th>
@@ -105,12 +85,6 @@ const Alumni = () => {
                           <td class="whitespace-nowrap px-4 py-4">
                             <div class="flex items-center">
                               <div class="h-10 w-10 flex-shrink-0">
-                                {/* <img
-                                  class="h-10 w-10 rounded-full object-cover"
-                                  src="https://images.unsplash.com/photo-1628157588553-5eeea00af15c?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1160&amp;q=80"
-                                  alt=""
-                                /> */}
-
                                 <Avatar>
                                   <AvatarFallback>
                                     {a?.name[0]?.toUpperCase()}
@@ -133,9 +107,9 @@ const Alumni = () => {
                             {a.email}
                           </td>
                           <td class="whitespace-nowrap px-4 py-4 text-right text-sm font-medium">
-                            <a href="#" class="text-gray-700">
+                            <Link to={`/experience/${a.id}`} class="text-gray-700">
                               View Experiences
-                            </a>
+                            </Link>
                           </td>
                         </tr>
                       );
