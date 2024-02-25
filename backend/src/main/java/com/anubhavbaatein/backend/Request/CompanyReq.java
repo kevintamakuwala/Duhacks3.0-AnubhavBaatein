@@ -12,8 +12,4 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CompanyReq {
     private String name;
-    
-    private List<String> experiencesId = new ArrayList<>();
-
-    private List<String> jobsId = new ArrayList<>();
 }

@@ -33,6 +33,15 @@ public class JobServiceImpl implements JobService {
     public Job addJob(Job job) {
         Company company = job.getCompany();
 
+        List<Job> jobs = company.getJobs();
+
+        for(Job i : jobs)
+        {
+            if(i.getTitle().equals(job.getTitle())){
+                return i;
+            }
+        }
+
         if (company != null) {
             company.getJobs().add(job);
             companyRepository.save(company);

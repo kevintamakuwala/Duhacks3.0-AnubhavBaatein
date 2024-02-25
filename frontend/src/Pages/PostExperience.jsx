@@ -25,10 +25,12 @@ import {
 import { createExperience } from "@/Services/ExperienceService";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
+import { createCompany } from "@/Services/CompanyService";
+import { createJob } from "@/Services/JobService";
 
 const experienceFormSchema = z.object({
   title: z.string(),
-  ctc: z.number().positive().int(),
+  ctc: z.string(),
   type: z.string(),
   location: z.string(),
   company: z.string(),
@@ -36,7 +38,9 @@ const experienceFormSchema = z.object({
   description: z.string(),
   difficulty: z.string(),
   month: z.string(),
-  rounds: z.number().positive().int(),
+  rounds: z.string(),
+  keywords : z.string(),
+  categories : z.string()
 });
 
 const months = [
@@ -55,6 +59,10 @@ const months = [
 ];
 
 const PostExperience = () => {
+
+  // const {id} = localStorage.getItem("id");
+  const id = "124";
+
   const form = useForm({
     resolver: zodResolver(experienceFormSchema),
     defaultValues: {
@@ -68,11 +76,53 @@ const PostExperience = () => {
       difficulty: "",
       month: "",
       rounds: "",
+      keywords: "",
+      categories : ""
     },
   });
 
   async function onSubmit(data) {
+
+    const keyword = data?.keywords?.split(",")
+
+    data.keywords = keyword;
+
+    const category = data?.categories?.split(",")
+
+    data.categories = category;
+
+
     if (data) {
+
+      const res = await createCompany({name : data?.company}).then((res)=>{
+        console.log("Company Creation : ");
+        console.log(res);
+        return res.data;
+      });
+
+      data.companyId = res;
+
+      const jobData = {
+        title : data.title,
+        ctc : data.ctc,
+        type : data.type,
+        location : data.location,
+        industry : data.industry,
+        companyId : data.companyId
+      }
+
+      const job = await createJob(jobData).then((res) => {
+        console.log("Job Creation");
+        console.log(res);
+        return res.data;
+      })
+
+      data.jobId = job;
+
+      data.userId = id;
+
+      console.log(data);
+
       const response = await createExperience(data).then((response) => {
         console.log(response);
         setUser(response);
@@ -214,7 +264,7 @@ const PostExperience = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen">
-              <Card className="">
+              <Card className="w-full my-6">
                 <CardHeader>
                   <CardTitle>Post Experience</CardTitle>
                   <CardDescription>
@@ -225,7 +275,7 @@ const PostExperience = () => {
                   <Form {...form}>
                       <form onSubmit={form.handleSubmit(onSubmit)}>
                           {/* make all form fields in two column */}
-                      <div className="grid w-full items-center gap-4 grid-cols-4">
+                      <div className="grid w-full items-center gap-4 md:grid-cols-2">
                         {fields}
                       </div>
                       <Button type="submit" className="mt-4">
