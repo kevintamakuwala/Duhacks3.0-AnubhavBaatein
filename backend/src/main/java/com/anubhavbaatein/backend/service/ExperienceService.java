@@ -19,5 +19,5 @@ public interface ExperienceService {
 
     public List<Experience> getAlumniExperiences(String id);
 
-    public Page<Experience> getExperienceWithPagination(int id);
+    public List<Experience> getExperienceWithPagination(int id);
 }
