@@ -97,14 +97,13 @@ public class UserServiceImpl implements UserService {
 //    }
 
     @Override
-    public List<User>getAlumniWithPagination(int PageNo){
-            List<User>alumni = userRepository.findAll();
+    public List<User> getAlumniWithPagination(int PageNo) {
+        List<User> alumni = userRepository.findAll();
 
-            int toIndex = ((PageNo-1)*10)+10;
-            if(alumni.size()<toIndex)
-            toIndex = (PageNo-1)*10+ alumni.size()%10;
+        int toIndex = ((PageNo - 1) * 12) + 12;
+        if (alumni.size() < toIndex)
+            toIndex = (PageNo - 1) * 12 + alumni.size() % 12;
 
-            List<User>alumnis = alumni.subList((PageNo-1)*10,toIndex);
-            return alumnis;
+        return alumni.subList((PageNo - 1) * 12, toIndex);
     }
 }

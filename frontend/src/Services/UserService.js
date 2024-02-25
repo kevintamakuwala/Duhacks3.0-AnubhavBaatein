@@ -17,6 +17,22 @@ export const getUserById = async (id) => {
   return response;
 };
 
+export const getAlumniWithPagination = async (no) => {
+  const response = await Axios.get(`${url}/alumniWithPagination/${no}`).then((res) => {
+    console.log(res.data);
+    return res.data;
+  });
+  return response;
+};
+
+export const getAlumnis = async () => {
+  const response = await Axios.get(`${url}/user/alumni`).then((res) => {
+    console.log(res.data);
+    return res.data;
+  });
+  return response;
+};
+
 export const createUser = async (user) => {
   const response = await Axios.post(`${url}/user`, user).then((res) => {
     console.log(res.data);
