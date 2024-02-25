@@ -15,7 +15,7 @@ function Home() {
             {/* // navbar // main content */}
             <div>
                 <div className="w-auto md:h-auto flex flex-col sm:flex-row items-center">
-                    <div className="flex flex-col lg:gap-48 justify-between md:max-h-fit">
+                    <div className="flex flex-col lg:gap-3 justify-between md:max-h-fit">
                         <h1 className="scroll-m-20 text-4xl font-semibold tracking-tight lg:text-5xl sm:mx-[10%] mt-5 mx-3">
                             One step closer to your Dream company
                         </h1>
