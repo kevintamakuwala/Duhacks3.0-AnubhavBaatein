@@ -1,6 +1,7 @@
 package com.anubhavbaatein.backend.controller;
 
 import com.anubhavbaatein.backend.Request.ExperienceReq;
+import com.anubhavbaatein.backend.Response.ExperienceUpdate;
 import com.anubhavbaatein.backend.model.*;
 import com.anubhavbaatein.backend.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,34 +128,12 @@ public class ExperienceController {
     }
 
     @PutMapping("/experience/{id}")
-    public ResponseEntity<Experience> updateExperienceById(@RequestBody ExperienceReq data, @PathVariable("id") String id) {
+    public ResponseEntity<Experience> updateExperienceById(@RequestBody ExperienceUpdate data, @PathVariable("id") String id) {
         try {
             Experience experience = experienceService.getExperienceById(id);
 
             if (experience != null) {
                 experience.setDescription(data.getDescription());
-                experience.setKeywords(data.getKeywords());
-                experience.setDifficultyLevel(data.getDifficultyLevel());
-                experience.setRounds(data.getRounds());
-                experience.setMonth(data.getMonth());
-
-                List<String> categories = data.getCategories();
-
-                List<Category> categoryList = new ArrayList<>();
-                for (String category : categories) {
-                    Category temp = categoryService.getCategoryByTitle(category);
-                    categoryList.add(temp);
-                }
-                experience.setCategories(categoryList);
-
-                User user = userService.getUserById(data.getUserId());
-                experience.setUser(user);
-
-                Job job = jobService.getJobById(data.getJobId());
-                experience.setJob(job);
-
-                Company company = companyService.getCompanyById(data.getCompanyId());
-                experience.setCompany(company);
 
                 experienceService.updateExperienceById(experience, experience.getId());
 

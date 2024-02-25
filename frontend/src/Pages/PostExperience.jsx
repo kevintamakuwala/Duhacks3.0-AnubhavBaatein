@@ -142,7 +142,6 @@ const PostExperience = () => {
 
       const response = await createExperience(data).then((response) => {
         console.log(response);
-        setUser(response);
         form.reset();
       });
     }

@@ -17,6 +17,7 @@ import Alumni from "./Pages/Alumni";
 import { auth } from "./config/firebase";
 import Contact from "./Pages/Contact";
 import AddJob from "./Pages/AddJob";
+import UpdatePost from "./Pages/UpdatePost";
 
 export const AppContext = createContext();
 
@@ -55,7 +56,8 @@ export default function App() {
             <Route path="/post-experience" element={isLoggedIn ? <PostExperience /> : <Register/>} />
             <Route path="/alumni" element={isLoggedIn ? <Alumni/> : <Register/>}/>
             <Route path="/contact" element={isLoggedIn ? <Contact /> : <Login />} />
-            <Route path="/add-job" element={isLoggedIn ? <AddJob /> : <Register/>} />
+            <Route path="/add-job" element={isLoggedIn ? <AddJob /> : <Register />} />
+            <Route path="/update-post" element={isLoggedIn ? <UpdatePost/> : <Register/>}/>
           </Routes>
       </div>
         {isLoggedIn && location !== '/register' && location !== '/login' &&  <Footer />}
