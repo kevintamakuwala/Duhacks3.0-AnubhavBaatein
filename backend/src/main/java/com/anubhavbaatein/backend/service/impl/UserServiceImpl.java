@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    List<User>getAlumniWithPagination(int pageNo){
+    Page<User>getAlumniWithPagination(int pageNo){
             return userRepository.getAlumniWithPagination(PageRequest.of(pageNo, 10));
     }
 }

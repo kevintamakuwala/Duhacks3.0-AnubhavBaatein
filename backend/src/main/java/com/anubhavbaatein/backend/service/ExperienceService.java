@@ -16,4 +16,6 @@ public interface ExperienceService {
     public List<Experience> searchExperiences(String keyword);
 
     public List<Experience> getAlumniExperiences(String id);
+
+    public List<Experience>getExperienceWithPagination(int id);
 }

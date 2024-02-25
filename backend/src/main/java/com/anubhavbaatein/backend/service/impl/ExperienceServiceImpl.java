@@ -181,8 +181,14 @@ public class ExperienceServiceImpl implements ExperienceService {
     }
     
     @Override
-    public List<Experience> getAlumniExperiences(String id) {
+    public List<Experience> getAlumniExperiences(int id) {
         User user = userRepository.findById(id).get();
         return user.getExperiences();
     }
+
+    @Override
+    public Page<Experience>getExperienceWithPagination(){
+        return ExperienceRepository.get
+    }
+
 }
