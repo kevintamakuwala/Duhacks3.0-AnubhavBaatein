@@ -1,6 +1,23 @@
 ### Project Aim:
 In college, students often feel uncertain about the level of preparation needed for placement interviews. "Anubhav बांटें" aims to tackle this issue by providing a platform where students can learn from the experiences of alumni who have successfully navigated placement interviews.
 
+### What problem we are solving:
+<ul>
+   <li>
+      Relevance: Existing online platforms offer a plethora of interview experiences, but they often lack relevance for on-campus placements where companies may employ different approaches.
+   </li>
+   <li>
+      Limited Connectivity: Many students may not have extensive connections with alumni, hindering access to valuable interview experiences tailored to their college's context.
+   </li>
+   <li>
+      Solution: AnubhavBaatein bridges this gap by connecting students directly with alumni, providing them with firsthand, context-specific interview experiences crucial for on-campus placements.
+   </li>
+   <li>
+      Enhanced Preparation: Through our platform, students gain access to absolute interview experiences shared by alumni, empowering them to prepare effectively and confidently for their upcoming interviews.
+   </li>
+</ul>
+
+
 ### How It Helps Students:
 Imagine a place where students can access real stories and experiences shared by seniors who went through the same process. These stories are categorized based on the companies, job roles, and specific interview rounds. It's like having a guidebook tailored to the exact challenges faced during placement seasons.
 
