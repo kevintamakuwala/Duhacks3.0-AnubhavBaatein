@@ -28,7 +28,6 @@ const Alumni = () => {
       try {
         const totalData = await getAlumnis();
         setTotalAlumni(totalData?.length);
-        console.log(totalData?.length)
       } catch (error) {
         console.error("Error fetching total experiences:", error);
       }

@@ -3,7 +3,6 @@ import { url } from ".";
 
 export const getExperiences = async () => {
   const response = await Axios.get(`${url}/experience`).then((res) => {
-    console.log(res.data);
     return res.data;
   });
   return response;
@@ -11,7 +10,6 @@ export const getExperiences = async () => {
 
 export const getExperiencesWithPagination = async (no) => {
   const response = await Axios.get(`${url}/experienceWithPagination/${no}`).then((res) => {
-    console.log(res.data);
     return res.data;
   });
   return response;
@@ -19,7 +17,6 @@ export const getExperiencesWithPagination = async (no) => {
 
 export const getExperienceById = async (id) => {
   const response = await Axios.get(`${url}/experience/${id}`).then((res) => {
-    console.log(res.data);
     return res.data;
   });
   return response;
@@ -27,7 +24,6 @@ export const getExperienceById = async (id) => {
 
 export const createExperience = async (experience) => {
   const response = await Axios.post(`${url}/experience`, experience).then((res) => {
-      console.log(res.data);
       return res.data;
     }
   );
@@ -36,7 +32,6 @@ export const createExperience = async (experience) => {
 
 export const updateExperience = async (experience) => {
   const response = await Axios.put(`${url}/experience/${experience.id}`,experience).then((res) => {
-    console.log(res.data);
     return res.data;
   });
   return response;
@@ -44,7 +39,6 @@ export const updateExperience = async (experience) => {
 
 export const deleteExperience = async (id) => {
   const response = await Axios.delete(`${url}/experience/${id}`).then((res) => {
-    console.log(res.data);
     return res.data;
   });
   return response;
@@ -52,7 +46,6 @@ export const deleteExperience = async (id) => {
 
 export const searchExperience = async (keyword) => {
   const response = await Axios.get(`${url}/search`,keyword).then((res) => {
-    console.log(res.data);
     return res.data;
   });
 

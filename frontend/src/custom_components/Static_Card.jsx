@@ -7,7 +7,6 @@ function Static_Card() {
   const fetchData = async () => {
     try {
       const response = await getAnalytics().then((res) => {
-        console.log(res);
 
         // iterate over the object and capitalize the first letter of the key
         res = Object.keys(res).map((key) => {

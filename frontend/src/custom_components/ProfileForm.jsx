@@ -44,11 +44,9 @@ export function ProfileForm() {
   async function onSubmit(data) {
 
     data.id = JSON.parse(localStorage.getItem("user")).uid;
-
-    console.log(data);
     if (data) {
       const response = await updateUser(data).then((response) => {
-        console.log("Response");
+        
         setUser(response);
         setRefresh((val) => !val);
         form.reset();
@@ -57,12 +55,12 @@ export function ProfileForm() {
   }
 
   const uid = JSON.parse(localStorage.getItem("user")).uid;
-  console.log(uid);
+  
   const [user, setUser] = useState();
 
   const getData = async () => {
     await getUserById(uid).then((response) => {
-      console.log(response);
+      
       setUser(response);
       form.setValue("name", response.name);
       form.setValue("email", response.email);

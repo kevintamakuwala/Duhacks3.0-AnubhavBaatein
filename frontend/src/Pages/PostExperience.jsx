@@ -95,8 +95,6 @@ const PostExperience = () => {
     if (data) {
 
       const res = await createCompany({name : data?.company}).then((res)=>{
-        console.log("Company Creation : ");
-        console.log(res);
         return res;
       });
 
@@ -112,8 +110,6 @@ const PostExperience = () => {
       }
 
       const job = await createJob(jobData).then((res) => {
-        console.log("Job Creation");
-        console.log(res);
         return res;
       })
 
@@ -126,8 +122,6 @@ const PostExperience = () => {
           title: data.categories[i]
         }
         const category = await createCategory(categoryData).then((res) => {
-          console.log("Category Creation");
-          console.log(res);
           return res;
         })
         data.categories[i] = category.title;
@@ -137,11 +131,7 @@ const PostExperience = () => {
       // remove difficulty from data
       delete data.difficulty;
 
-      console.log("Experience Data");
-      console.log(data);
-
       const response = await createExperience(data).then((response) => {
-        console.log(response);
         form.reset();
       });
     }

@@ -47,17 +47,12 @@ const UpdatePost = () => {
   });
 
   async function onSubmit(data) {
-
-    console.log("Experience Data");
-    console.log(data.description);
-
     const experience = {
       id: id,
       description : data.description
     }
 
     const response = await updateExperience(experience).then((response) => {
-      console.log(response);
       form.reset();
     });
   }

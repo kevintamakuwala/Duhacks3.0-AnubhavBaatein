@@ -65,7 +65,6 @@ export function Login() {
         password: values.password,
       };
 
-      console.log(data);
       await signInWithEmailAndPassword(auth, data.username, data.password)
         .then((response) => {
           localStorage.setItem("user", JSON.stringify(response.user));

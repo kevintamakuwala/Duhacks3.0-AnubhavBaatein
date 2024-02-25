@@ -29,7 +29,7 @@ export function RegisterForm() {
     if (email.includes("@ddu.ac.in")) {
       const year = new Date().getFullYear();
       const roll = email.split("@")[0].substring(0, 2);
-      console.log(roll);
+      
       if (roll < year - 3) {
         data.role = "alumni";
       }
@@ -45,7 +45,7 @@ export function RegisterForm() {
 
     
       await createUser(data).then((response) => {
-        console.log(response);
+        
         localStorage.setItem("user", JSON.stringify(response));
         setIsLoggedIn(true);
         setRefresh((val) => !val);
@@ -68,7 +68,7 @@ export function RegisterForm() {
     try {
       const response = await createUserWithEmailAndPassword(auth, email, password).then(
         (response) => {
-          console.log(response.user.uid);
+          
           return response;
         }
       );

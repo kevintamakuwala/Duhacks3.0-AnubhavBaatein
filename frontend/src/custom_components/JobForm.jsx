@@ -37,7 +37,6 @@ export function JobForm() {
   async function onSubmit(data) {
     if (data) {
       const response = await createJob(data).then((response) => {
-        console.log(response);
         setUser(response);
         form.reset();
       });

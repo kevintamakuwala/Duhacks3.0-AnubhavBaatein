@@ -20,12 +20,11 @@ export function UserProfile() {
   const navigate = useNavigate();
 
   const uid = JSON.parse(localStorage.getItem("user")).uid;
-  console.log(uid);
+  
   const [user, setUser] = useState();
 
   const getData = async () => {
     await getUserById(uid).then((response) => {
-      console.log(response);
       setUser(response);
     });
   };
