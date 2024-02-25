@@ -1,5 +1,7 @@
 package com.anubhavbaatein.backend.service;
 import com.anubhavbaatein.backend.model.Experience;
+import org.springframework.data.domain.Page;
+
 import java.util.List;
 
 public interface ExperienceService {
@@ -17,5 +19,5 @@ public interface ExperienceService {
 
     public List<Experience> getAlumniExperiences(String id);
 
-    public List<Experience>getExperienceWithPagination(int id);
+    public Page<Experience> getExperienceWithPagination(int id);
 }

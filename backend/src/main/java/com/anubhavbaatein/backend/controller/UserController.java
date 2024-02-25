@@ -144,8 +144,9 @@ public class UserController {
         return ResponseEntity.ok(userService.getTopUsers());
     }
 
-    @GetMapping("/alumniWithPagination")
-    public Repository<?>getAlumniWithPagination(int pageNo){
-            return ResponseEntity.ok(userService.getAlumniWithPagination(pageNo));
+    @GetMapping("/alumniWithPagination/{pageNo}")
+    public ResponseEntity<?>getAlumniWithPagination(@PathVariable("pageNo")String pageNo){
+            int pageN = Integer.parseInt(pageNo);
+            return ResponseEntity.ok(userService.getAlumniWithPagination(pageN));
     }
 }

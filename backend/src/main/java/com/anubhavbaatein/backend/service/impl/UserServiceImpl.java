@@ -6,6 +6,9 @@ import com.anubhavbaatein.backend.repository.ExperienceRepository;
 import com.anubhavbaatein.backend.repository.UserRepository;
 import com.anubhavbaatein.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -88,8 +91,20 @@ public class UserServiceImpl implements UserService {
         return alumni;
     }
 
+//    @Override
+//    Page<User>getAlumi(int pageNo){
+//            return userRepository.getAlumniWithPagination(PageRequest.of(pageNo, 10));
+//    }
+
     @Override
-    Page<User>getAlumniWithPagination(int pageNo){
-            return userRepository.getAlumniWithPagination(PageRequest.of(pageNo, 10));
+    public List<User>getAlumniWithPagination(int PageNo){
+            List<User>alumni = userRepository.findAll();
+
+            int toIndex = ((PageNo-1)*10)+10;
+            if(alumni.size()<toIndex)
+            toIndex = (PageNo-1)*10+ alumni.size()%10;
+
+            List<User>alumnis = alumni.subList((PageNo-1)*10,toIndex);
+            return alumnis;
     }
 }

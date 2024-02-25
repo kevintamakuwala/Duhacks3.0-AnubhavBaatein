@@ -10,8 +10,9 @@ import com.anubhavbaatein.backend.repository.ExperienceRepository;
 import com.anubhavbaatein.backend.repository.JobRepository;
 import com.anubhavbaatein.backend.repository.UserRepository;
 import com.anubhavbaatein.backend.service.ExperienceService;
-import com.anubhavbaatein.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -181,14 +182,14 @@ public class ExperienceServiceImpl implements ExperienceService {
     }
     
     @Override
-    public List<Experience> getAlumniExperiences(int id) {
+    public List<Experience> getAlumniExperiences(String id) {
         User user = userRepository.findById(id).get();
         return user.getExperiences();
     }
 
     @Override
-    public Page<Experience>getExperienceWithPagination(){
-        return ExperienceRepository.get
+    public Page<Experience> getExperienceWithPagination(int pageNo){
+        return experienceRepository.getExperienceWithPagination(PageRequest.of(pageNo,10));
     }
 
 }
