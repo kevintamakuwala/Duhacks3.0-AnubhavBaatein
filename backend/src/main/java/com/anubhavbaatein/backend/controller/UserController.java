@@ -133,8 +133,14 @@ public class UserController {
     }
 
     @GetMapping("/alumniWithPagination/{pageNo}")
-    public ResponseEntity<?>getAlumniWithPagination(@PathVariable("pageNo")String pageNo){
-            int pageN = Integer.parseInt(pageNo);
-            return ResponseEntity.ok(userService.getAlumniWithPagination(pageN));
+    public ResponseEntity<?> getAlumniWithPagination(@PathVariable("pageNo") String pageNo) {
+        int pageN = Integer.parseInt(pageNo);
+        return ResponseEntity.ok(userService.getAlumniWithPagination(pageN));
+    }
+    
+    // analytics controller which return the count of total users , total alumni , total companies , total experiences
+    @GetMapping("/analytics")
+    public ResponseEntity<?> getAnalytics() {
+        return ResponseEntity.ok(userService.getAnalytics());
     }
 }

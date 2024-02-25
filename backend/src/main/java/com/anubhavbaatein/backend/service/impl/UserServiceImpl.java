@@ -106,4 +106,28 @@ public class UserServiceImpl implements UserService {
 
         return alumni.subList((PageNo - 1) * 12, toIndex);
     }
+
+    @Override
+    public Map<String, String> getAnalytics() {
+        // create a map to store the analytics
+        Map<String, String> analytics = new HashMap<>();
+
+        // get the total number of users
+        long totalUsers = userRepository.count();
+        analytics.put("totalUsers", String.valueOf(totalUsers));
+
+        // get the total number of alumni
+        long totalAlumni = userRepository.countByIsAlumni();
+        analytics.put("totalAlumni", String.valueOf(totalAlumni));
+
+        // get the total number of companies
+        long totalCompanies = userRepository.count();
+        analytics.put("totalCompanies", String.valueOf(totalCompanies));
+
+        // get the total number of experiences
+        long totalExperiences = experienceRepository.count();
+        analytics.put("totalExperiences", String.valueOf(totalExperiences));
+
+        return analytics;
+    }
 }

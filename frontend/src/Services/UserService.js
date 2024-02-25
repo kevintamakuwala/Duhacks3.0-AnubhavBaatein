@@ -76,3 +76,12 @@ export const topTestimonials = async () => {
 
   return response;
 };
+
+// get analytics
+export const getAnalytics = async () => {
+  const response = await Axios.get(`${url}/analytics`).then((res) => {
+    console.log(res.data);
+    return res.data;
+  });
+  return response;
+};

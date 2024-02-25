@@ -13,13 +13,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { FaLocationDot } from "react-icons/fa6";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 export function JobCard({ jobobj }) {
 
-  console.log(jobobj);
+  const expid = useParams();
 
+  const navigate = useNavigate();
+ 
   return (
-    <Card className="bg-white rounded-lg shadow-md overflow-hidden">
+    <Card className="bg-white rounded-lg shadow-md overflow-hidden" onClick={() => navigate(`/viewexprience/${jobobj?.id}`)} >
       <CardHeader className="grid grid-cols-[1fr_110px] items-start gap-4 space-y-0 p-4 bg-gray-50">
         <div className="space-y-1">
           <CardTitle className="text-xl font-semibold">{jobobj?.job?.title}</CardTitle>

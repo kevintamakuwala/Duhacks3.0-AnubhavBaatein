@@ -1,4 +1,5 @@
 package com.anubhavbaatein.backend.service;
+import com.anubhavbaatein.backend.Response.TopCategory;
 import com.anubhavbaatein.backend.model.Category;
 import java.util.List;
 
@@ -15,5 +16,5 @@ public interface CategoryService {
     
     public Category getCategoryByTitle(String name);
 
-    public List<Category> getTopCategories();
+    public List<TopCategory> getTopCategories();
 }

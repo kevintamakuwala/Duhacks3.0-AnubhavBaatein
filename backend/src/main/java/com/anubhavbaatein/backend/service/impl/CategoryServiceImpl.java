@@ -1,5 +1,6 @@
 package com.anubhavbaatein.backend.service.impl;
 
+import com.anubhavbaatein.backend.Response.TopCategory;
 import com.anubhavbaatein.backend.model.Category;
 import com.anubhavbaatein.backend.model.Experience;
 import com.anubhavbaatein.backend.repository.CategoryRepository;
@@ -59,7 +60,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> getTopCategories() {
+    public List<TopCategory> getTopCategories() {
 
         Map<String, Integer> categoryExperiencesCount = new HashMap<>();
         List<Experience> experiences = experienceRepository.findAll();
@@ -70,13 +71,22 @@ public class CategoryServiceImpl implements CategoryService {
             }
         }
         List<Category> categories = categoryRepository.findAll();
-        categories.sort((c1, c2) -> {
+        List<TopCategory> topCategories = new java.util.ArrayList<>();
+
+        for (Category category : categories) {
+            TopCategory topCategory = new TopCategory();
+            topCategory.setId(category.getId());
+            topCategory.setTitle(category.getTitle());
+            topCategory.setExperienceCount(categoryExperiencesCount.getOrDefault(category.getId(), 0));
+            topCategories.add(topCategory);
+        }
+
+        topCategories.sort((c1, c2) -> {
             long a = categoryExperiencesCount.getOrDefault(c1.getId(), 0);
             long b = categoryExperiencesCount.getOrDefault(c2.getId(), 0);
             return Long.compare(b, a);
         });
         int maxCategories = 8;
-        return categories.subList(0, Math.min(maxCategories, categories.size()));
-
+        return topCategories.subList(0, Math.min(maxCategories, categories.size()));
     }
 }
