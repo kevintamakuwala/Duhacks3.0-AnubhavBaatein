@@ -29,9 +29,6 @@ function Home() {
                     </div>
                     <img className="  mt-4 lg:w-[50%] sm:w-[44%] lg:mb-16" src={vector} alt="SVG Image" />
                 </div>
-                <div>
-                    <Static_Card />
-                </div>
             </div>
             <div class="p-4 text-base leading-7 text-gray-600 w-10/12 md:h-auto md:flex-row items-center justify-between py-9">
                 <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-3xl">Popular Companies</h2>

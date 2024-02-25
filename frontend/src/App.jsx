@@ -18,6 +18,7 @@ import { auth } from "./config/firebase";
 import Contact from "./Pages/Contact";
 import AddJob from "./Pages/AddJob";
 import UpdatePost from "./Pages/UpdatePost";
+import ViewExperience from "./Pages/ViewExperience";
 
 export const AppContext = createContext();
 
@@ -59,6 +60,7 @@ export default function App() {
             <Route path="/contact" element={isLoggedIn ? <Contact /> : <Login />} />
             <Route path="/add-job" element={isLoggedIn ? <AddJob /> : <Register />} />
             <Route path="/update-post" element={isLoggedIn ? <UpdatePost/> : <Register/>}/>
+            <Route path="/viewexprience/:id" element={isLoggedIn ? <ViewExperience/> : <Register/>}/>
           </Routes>
       </div>
         {isLoggedIn && location !== '/register' && location !== '/login' &&  <Footer />}
