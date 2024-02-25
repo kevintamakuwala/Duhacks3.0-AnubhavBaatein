@@ -24,6 +24,26 @@ export function RegisterForm() {
         github: null,
         role : null,
       }
+    
+    // set role on basis of email if email contains @ddu.ac.in and first two characters are number < current year - 3 then role is alumni else student
+    if (email.includes("@ddu.ac.in")) {
+      const year = new Date().getFullYear();
+      const roll = email.split("@")[0].substring(0, 2);
+      console.log(roll);
+      if (roll < year - 3) {
+        data.role = "alumni";
+      }
+      else {
+        data.role = "student";
+      }
+    }
+    else {
+      alert("Please enter valid email address contains @ddu.ac.in and first two characters are number."); 
+      return;
+    }
+
+
+    
       await createUser(data).then((response) => {
         console.log(response);
         localStorage.setItem("user", JSON.stringify(response));
@@ -37,6 +57,12 @@ export function RegisterForm() {
     const email = event.target.email.value;
     const password = event.target.password.value;
     const name = event.target.name.value;
+
+    // email must contain @ddu.ac.in
+    if (!email.includes("@ddu.ac.in")) {
+      alert("Please enter valid email");
+      return;
+    }
 
     try {
       const response = await createUserWithEmailAndPassword(auth, email, password).then(
