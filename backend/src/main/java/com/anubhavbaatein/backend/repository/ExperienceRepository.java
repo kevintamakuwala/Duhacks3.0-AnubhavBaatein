@@ -24,8 +24,4 @@ public interface ExperienceRepository extends JpaRepository<Experience, String> 
     List<Experience> findByRounds(Integer rounds);
 
     List<Experience> findByMonth(String month);
-
-    @Query("SELECT u FROM Experience u ")
-    Page<Experience> getExperienceWithPagination(final Pageable pageable);
-
 }
