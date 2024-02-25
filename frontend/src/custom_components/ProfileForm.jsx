@@ -12,7 +12,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { updateUser } from "@/Services/UserService";
+import { getUserById, updateUser } from "@/Services/UserService";
+import { useEffect, useState } from "react";
 
 const profileFormSchema = z.object({
   name: z.string(),
@@ -37,11 +38,35 @@ export function ProfileForm() {
   });
 
   async function onSubmit(data) {
-    console.log(data);
-    await updateUser(data).then((response) => {
-      console.log(response);
-    });
+    if (data) {
+      const response = await updateUser(data).then((response) => {
+        console.log("Response");
+        setUser(response);
+        form.reset();
+      });
+    }
   }
+
+  // const uid = JSON.parse(localStorage.getItem("user")).uid;
+  // console.log(uid);
+  const [user, setUser] = useState();
+
+  const getData = async () => {
+    await getUserById("124").then((response) => {
+      console.log(response);
+      setUser(response);
+      form.setValue("name", response.name);
+      form.setValue("email", response.email);
+      form.setValue("phone", response.phone);
+      form.setValue("currentCompany", response.currentCompany);
+      form.setValue("linkedin", response.linkedin);
+      form.setValue("github", response.github);
+    });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <Form {...form}>
