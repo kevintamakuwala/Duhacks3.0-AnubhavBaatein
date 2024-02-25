@@ -11,10 +11,13 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { getUserById } from "@/Services/UserService";
 import { AppContext } from "@/App";
+import { signOut } from "firebase/auth";
+import { auth } from "@/config/firebase";
 
 export function UserProfile() {
-
-  const {refresh} = useContext(AppContext); 
+  const { refresh, setIsLoggedIn } = useContext(AppContext);
+  
+  const navigate = useNavigate();
 
   const uid = JSON.parse(localStorage.getItem("user")).uid;
   console.log(uid);
@@ -41,7 +44,7 @@ export function UserProfile() {
       // display_key is the key with the first letter capitalized
       let display_key = key.charAt(0).toUpperCase() + key.slice(1);
 
-      if(user[key] === null) return null;
+      if (user[key] === null) return null;
 
       return (
         <div key={index}>
@@ -56,7 +59,17 @@ export function UserProfile() {
     });
   }
 
-  const navigate = useNavigate();
+  async function logOut() {
+    try {
+      await signOut(auth).then((response) => {
+        localStorage.removeItem("user");
+        setIsLoggedIn(false);
+        navigate("/register");
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <HoverCard>
@@ -92,6 +105,14 @@ export function UserProfile() {
                 }}
               >
                 Share Experince
+              </Button>
+
+              <Button
+                className=" m-2 block sm:hidden"
+                variant="outline"
+                onClick={logOut}
+              >
+                Logout
               </Button>
             </div>
           </div>
