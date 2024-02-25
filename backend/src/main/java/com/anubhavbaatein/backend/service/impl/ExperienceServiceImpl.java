@@ -191,11 +191,11 @@ public class ExperienceServiceImpl implements ExperienceService {
     public List<Experience> getExperienceWithPagination(int pageNo){
         List<Experience>experience = experienceRepository.findAll();
 
-            int toIndex = ((pageNo-1)*10)+10;
+            int toIndex = ((pageNo-1)*12)+12;
             if(experience.size()<toIndex)
-            toIndex = (pageNo-1)*10+ experience.size()%10;
+            toIndex = (pageNo-1)*12+ experience.size()%12;
 
-            List<Experience>exp = experience.subList((pageNo-1)*10,toIndex);
+            List<Experience>exp = experience.subList((pageNo-1)*12,toIndex);
             return exp;
     }
 

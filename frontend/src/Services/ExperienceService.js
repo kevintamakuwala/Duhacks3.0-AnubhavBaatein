@@ -9,6 +9,14 @@ export const getExperiences = async () => {
   return response;
 };
 
+export const getExperiencesWithPagination = async (no) => {
+  const response = await Axios.get(`${url}/experienceWithPagination/${no}`).then((res) => {
+    console.log(res.data);
+    return res.data;
+  });
+  return response;
+};
+
 export const getExperienceById = async (id) => {
   const response = await Axios.get(`${url}/experience/${id}`).then((res) => {
     console.log(res.data);
